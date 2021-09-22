@@ -1,0 +1,108 @@
+---
+title: "Git/Hub Setup"
+author: "Dr. Mine Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+---
+
+class: title-slide
+
+```{r child = "../setup.Rmd"}
+```
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+
+---
+
+## Goals
+
+- Install git
+
+- Introduce yourself to git
+
+- Setup SSH key
+
+
+---
+
+class: middle
+
+
+For the first three goals, we will use [Happy Git and GitHub for the useR](https://happygitwithr.com/)
+
+---
+
+class: center middle inverse
+
+.font75[Goal 1: Install git]
+
+---
+
+class: center middle 
+
+## Check to see if you already have git
+
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/01d-check-git-install.mp4" type="video/mp4">
+</video>
+
+
+---
+
+class: center middle
+
+## Install git on Windows
+
+[Git for Windows](https://gitforwindows.org/)
+
+---
+
+class: center middle
+
+## Install git on Mac
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/01e-mac-git-install.mp4" type="video/mp4">
+</video>
+---
+
+class: center middle inverse
+
+.font75[Goal 2: Introduce yourself to git]
+
+---
+
+class: center middle 
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/01f-introduce-yourself.mp4" type="video/mp4">
+</video>
+
+---
+
+class: center middle inverse
+
+.font75[Goal 3: Setup SSH key]
+
+---
+
+class: center middle
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/01g-github-ssh.mp4" type="video/mp4">
+</video>
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <footer>   <hr>
+
+      <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+      </script>
+
+
+
+
+
+
+
+      <div class="media">
+  <img class="mr-3" src="img/stats295-logo.png"
+  alt="IDS Course logo" style="width:100px; margin-right:20%; margin-left:10%;">
+  <div class="media-body">
+    <h5 class="mt-0">Scientific Computing with R </h5>
+    University of California, Irvine <br>
+    Fall 2021 <br>
+    &copy; <a href="https://minedogucu.com">Mine Dogucu</a> <br>
+    
+  </div>
+</div>
+
+
+
+</footer>
+
+  </body>
+</html>

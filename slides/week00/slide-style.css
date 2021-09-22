@@ -1,0 +1,202 @@
+/*Title slide*/
+
+.title-slide{
+  background-image: url(img/stats295-logo.png);
+  background-position: 10% 60%;
+  background-size: 30%;
+  background-color:  #fefaf3;
+  font-size: 120%;
+  color:  #4d2600;
+  font-family: 'Poppins';
+  border:10px solid #5D6D7E;
+
+}
+
+.title-slide .remark-slide-number{
+  display: none;
+}
+
+
+.title-slide .title{
+  font-size: 80px;
+}
+
+
+/*end of title slide*/
+
+/*Logo*/
+.remark-slide-content:not(.title-slide){
+  background-image: url(img/stats295-logo.png);
+  background-position: 1% 99%;
+  background-size: 80px;
+}
+/*end of logo*/
+
+
+/*Column layouts*/
+
+.left-panel{
+  width: 43%;
+  float: left;
+}
+.right-panel{
+  width: 55%;
+  float: right;
+  padding-left: 1%;
+}
+
+.pull-left{
+  float: left;
+  width: 48%;
+}
+.pull-right{
+  float: right;
+  width: 48%;
+}
+
+/*end of column layouts*/
+
+/* lists */
+ul {
+  list-style: none;
+  padding-left: 20px;
+  font-size: 30px;
+}
+
+li {
+  position: relative;
+  padding-left: 27px;
+}
+
+li:before {
+  position: absolute;
+  top: 3;
+  left: 0;
+  right:6;
+  content: "\273b";
+  color: #ba4a00;
+}
+
+/*end of lists*/
+
+
+
+/*code*/
+
+pre {
+  border:3px solid #c6b089;
+  padding: 0.50em;
+  overflow-x: auto;
+}
+
+.remark-code, .remark-inline-code { 
+  font-family: monospace;
+  font-size: 30px;
+}
+
+.remark-inline-code{
+ color:#BA4A00;
+}
+
+.hljs-github .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: .5em;
+    background: red;
+}
+
+.remark-code-has-line-highlighted .remark-code-line:not(.remark-code-line-highlighted) {
+  opacity: 0.4;
+}
+
+.remark-code-line-highlighted {
+  background-color: #c6b089;
+
+}
+
+/*end of code*/
+
+/* Regular fonts*/
+
+a{
+  color:#2d8659;
+}
+
+
+p {
+  font-size: 30px;
+  font-family: 'Helvetica';
+
+}
+h1,h2,h3, h4{
+  color:  #4d2600;
+  font-family: 'Helvetica';
+
+
+}
+
+.footnote{
+    position: fixed;
+    bottom: 10px;
+    font-size:8px;
+    left:10%;
+
+}
+
+.font30{font-size:30px}
+.font75{font-size:75px}
+.font100{font-size:100px}
+.font150{font-size:150px}
+
+.righttext{
+  text-align: left;
+}
+
+/*end of regular*/
+
+
+/*tables*/
+
+thead, tfoot, tr:nth-child(even){background: #f8e3d6}
+
+table{
+  overflow-x: auto;
+  margin-left:auto;
+  margin-right: auto;
+}
+/*end of tables*/
+
+
+/* different types of notes*/
+
+blockquote{
+  background: #dcdcdc;
+  border-left: 5px solid #979797;
+  margin: 1.5em 10px;
+
+}
+
+
+.important {
+  padding-left: 10px;
+  position: relative;
+  background-color:  #fbebd0;
+  border-bottom: 2px solid #c5ac80;
+  border-top: 2px solid #c5ac80;
+
+} 
+
+
+/* end of different types of notes*/
+
+
+.inverse{
+  background-color: #5D6D7E;
+  color: #fefaf3;
+}
+
+
+video::-webkit-media-controls-panel{
+  background-image: linear-gradient(transparent, transparent) !important;
+}
+

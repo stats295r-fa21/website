@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>STATS 295</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/4145f6a1ca.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+
+
+    <!-- function for adding html within html-->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script>
+        $(function () {
+            $(".load-html").each(function () {
+                $(this).load(this.dataset.source);
+            });
+        });
+        </script>
+
+  </head>
+  <body>
+
+
+    <div class="load-html"  data-source="navbar.html"></div>
+
+
+    <div class = "main-text">
+		
+		 <button class="accordion">COVID-19</button>
+		<div class="panel"> 
+		
+			<br>
+			
+			This course is designed for in-person learning experience, however, you should <b>NOT</b> attend any in-person activities including lectures or meeting with your groups if
+			
+			<li>you have accommadations approved by Disability Services Center or</li>
+			<li>you tested positive for COVID-19 recently or</li>
+			<li>you show symptoms of COVID-19 or</li>
+			<li>you have not been cleared UCI's COVID center for any other reason (e.g. exposure).</li>
+			
+			<br>
+			
+			If you meet any of the aforementioned criteria connect to class through the zoom link and contact me in a timely manner to discuss any further accommodations.
+			
+			<br>
+			<br>
+			
+			In addition when in the classroom:
+			
+			<li>Masks must be worn at ALL times.</li>  
+			<li>If possible, sit at the same seat at every lecture.</li>
+			
+			<br>
+		
+		</div>
+
+      <button class="accordion">Assessment</button>
+<div class="panel">
+
+  <h1 style="margin-top:10px">Assessment</h1>
+  <p> It is my intent to design assessments that are a source of
+      intellectual curiosity, joy, and learning rather than a source
+      of stress. Assessments serve the purpose of measuring how much
+     you have learned (i.e. how much you have achieved of the course goals).
+     I would recommend you to first focus on your learning, then grades will
+      follow. The time zones indicated for all assessments are in Pacific Time.<br /><br /></p>
+
+
+
+  <h2>Homework Assignments</h2>
+  <p>Each week's lectures will teach you a certain topic. 
+	  With homework assignments, you will get to apply what you have learned. 
+	  Homework assignments should be based on individual work. Each assignment is due Monday at 9 am. </p>
+
+
+  <h2>Final project</h2>
+	You will be expected to complete a project of your own choice (with my prior approval). 
+	This project is intended to help you incorporate reproducible practices into your graduate work. 
+	Project content may differ depending on where you are in your graduate career. 
+	For instance, if you are a first-year student, you will have to do your data analysis qualifying exam at the end of the year. Thus you may want to complete last year's data analysis exam. The focus will be on reproducibility and R practices rather than correct choice of methods. 
+	If you are in a later stage in your graduate work, then you may work on other projects such as a manuscript preparation. Again your work will be evaluated based on reproducbility and R practices. 
+	You will be required to submit a proposal for the final project by Nov 8th at 09:00 am. 
+	The final submissions of the projects will be due December 10th at 10:00 am.
+	
+	
+	<h2>R package</h2>
+	You will be expected to submit an R package that you have developed as a group. It would be even better if it is a package you or your lab would neeed. The package is due November 29th at 09:00 am.
+	
+
+
+	
+	
+  <br>
+  <br>
+</div>
+
+<button class="accordion">Grading</button>
+<div class="panel">
+  <br>
+            Grades will <b>not</b> be curved and will <b>not</b> be rounded.
+            Please do not email me about any of these.
+
+            The following weights will be adopted in calculating the total grade.
+            <br><br>
+  <table class="table table-condensed table-striped text-left">
+  <thead>
+  <tr>
+  <th><span>Component</span></th>
+  <th><span>Weight</span></th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+	  <tr>
+  <td>Homework Assignments</td>
+  <td>30%</td>
+  </tr>
+
+  <tr>
+  <td>R package</td>
+  <td>20%</td>
+  </tr>
+
+  <tr>
+  <td>Final Project</td>
+  <td>50%</td>
+  </tr>
+
+
+
+  </tbody>
+  </table>
+
+  The weighted percentage score will be assigned a letter grade based on the following scheme:
+  <br><br>
+
+  <table class="table table-condensed table-striped text-left">
+  <thead>
+  <tr>
+  <th><span>Weighted Total Percentage</span></th>
+  <th><span>Letter Grade</span></th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr>
+  <td>96.5  -  100   </td>
+  <td>A+</td>
+  </tr>
+
+  <tr>
+  <td>93.5  -  96.499   </td>
+  <td>A</td>
+  </tr>
+
+  <tr>
+  <td>90  -  93.499</td>
+  <td>A-</td>
+  </tr>
+
+  <tr>
+  <td>86.5  -  89.999</td>
+  <td>B+</td>
+  </tr>
+
+  <tr>
+  <td>83.5  -  86.499</td>
+  <td>B</td>
+  </tr>
+
+  <tr>
+  <td>80  -  83.499</td>
+  <td>B-</td>
+  </tr>
+
+  <tr>
+  <td>76.5  -  79.999 </td>
+  <td>C+</td>
+  </tr>
+
+  <tr>
+  <td>73.5  -  76.499</td>
+  <td>C</td>
+  </tr>
+
+  <tr>
+  <td>70  -  73.499</td>
+  <td>C-</td>
+  </tr>
+
+  <tr>
+  <td>66.5  -  69.999</td>
+  <td>D+</td>
+  </tr>
+
+  <tr>
+  <td>63.5  -  66.499 </td>
+  <td>D</td>
+  </tr>
+
+  <tr>
+  <td>60  -  63.499 </td>
+  <td>D-</td>
+  </tr>
+
+  <tr>
+  <td> 59.999 and below </td>
+  <td>F</td>
+  </tr>
+
+  </tbody>
+  </table>
+  <br>
+
+
+
+</p>
+<br>
+<br>
+
+</div>
+<button class="accordion">Academic Honesty</button>
+<div class="panel">
+  <br>
+  <p>You are expected to comply to the rules set by the <a href="https://aisc.uci.edu/">Office of Academic Integrity and Student Conduct.</a>
+     Each assignment will be clearly labeled with instructions on whether you can work with others or not.
+      If there are no instructions, you should assume that the work should be completed by you only from start to finish.
+      Academic dishonesty includes, for example, cheating on examinations or any assignment, plagiarism of any kind (including improper citation of sources), having someone else take an examination or complete an assignment for you (or doing it for someone else), or any activity in which you represent someone else’s work as your own.
+      Violations of academic integrity will be referred to the Office of Academic Integrity and Student Conduct.
+      If you are unsure if something would be considered Academic Misconduct, ask me before submitting the work.</p>
+<br>
+</div>
+
+<button class="accordion">Disability Accommodations</button>
+<div class="panel">
+  <br>
+  <p>University of California, Irvine is committed to providing reasonable accommodations for all persons with permanent or temporary disabilities. This syllabus is available in alternate formats upon request. If you have a disability that impacts your participation in this class, please contact the Disability Services Center (DSC) as soon as possible. Students approved for accommodations will notify the instructor by sending out a Faculty Notification Letter from the DSC website. Disability Services Center - Building 313 in Engineering Gateway - <a href="https://www.dsc.uci.edu">www.dsc.uci.edu</a> - (949) 824-7494</p>
+  <br>
+</div>
+
+<button class="accordion">Diversity</button>
+<div class="panel">
+  <br>
+  <p>The University of California, Irvine, in accordance with applicable Federal and State law
+  and University policy, does not discriminate on the basis of race, color, national origin,
+  religion, sex, gender identity, pregnancy, physical or mental disability, medical condition
+  (cancer-related or genetic characteristics), ancestry, marital status, age, sexual
+  orientation, citizenship, or service in the uniformed services. The University also
+  prohibits sexual harassment. This nondiscrimination policy covers admission, access,
+  and treatment in University programs and activities.
+
+
+</p>
+
+<br>
+<br>
+</div>
+
+
+<button class="accordion">Inclusion</button>
+
+<div class="panel">
+  <br>
+<p>My goal is to make everyone (yes, that includes you too) feel welcome, not only in my classroom but also in the field of statistics and data science. If there is any reason you do not feel welcome in this class, please talk to me. If anything is said to you that makes you feel uncomfortable, please talk to me. If there is any life event that is interfering with your learning in this class, please talk to me. I may not be able to solve all your problems, but I may be able to direct you to the right resources on campus.
+  </p>
+  <br>
+</div>
+
+
+<button class="accordion">Communication Etiquette</button>
+<div class="panel">
+<br>
+	           <h2 id ="online">Online communication </h2>
+            Most of our online comminication will take place on ed.
+            While communicating online, please note the following:
+              <ul>
+                <li>Before posting a question, please make sure that the same question has not been posted before.</li>
+                <li>ed folders are labeled as Lecture, Homeowork etc. Make sure to write your post at the appropriate week's folder.</li>
+                <li>If you choose to post memes or any jokes, be mindful. Any joke about a person,
+                or a group of people, or cultures is not funny. However, statistics jokes are always welcome. </li>
+              <li>Respect opinions of others.</li>
+              <li>There are absolutely no stupid questions. Do not feel shy about asking questions. Do not
+              judge anyone about any question that they ask.</li>
+              <li>If somebody asks a question about homework etc. do not reveal answers for them.
+              Instead, show them in which lecture we have covered the topic. </li>
+              <li>Be generous with likes. That means when you read something useful like the post, so that we all know that we are not talking to ourselves but to each other.</li>
+				  <li>Answer each other's questions. The top 3 students who answer the most questions will receive extra credit.</li>
+				  <li>You can post anonymously. Others would not know who you are but I would know who you are.</li>
+
+              </ul>
+            <br>
+
+            <h2 id ="email">Writing an email</h2>
+
+          Please do not email me about course content unless it is private to you. If you are running into an issue, it is very likely that someone else is also having the same issue. Please post on ed so that we can all learn together. This way I would only answer the question once and everyone can benefit. In fact one of your peers may even answer it before I do. You can get a much quicker response. 
+	
+		While communicating over email, please make sure the email
+            <ul>
+              <li>has an informative subject line including the course code. </li>
+              <li>articulates your question or problem well.</li>
+              <li>has a closing statement such as <i>Sincerely, Kind Regards</i> etc.</li>
+              <li>has your name at the end.</li>
+            </ul>
+
+
+            Here is a sample email:
+            <blockquote>
+              Subject: Stats 295 - Your Subject <br> <br>
+              Dear Dr. Dogucu, <br>
+
+              I hope you are doing well (or some other humane sentence).
+              I am writing to you regarding ______________ (Your concern or problem).
+
+              (Any explanations, requests or suggestions for solutions to your problem) <br>
+              <br>
+              Sincerely/Kind regards, <br>
+              Your name <br>
+
+            </blockquote>
+            <br>
+
+ 
+
+
+
+
+</div> <!-- end of communication etiquette panel-->
+	  
+	  <button class="accordion">Course Material Distribution</button>
+<div class="panel">
+	<br>
+	Selling, preparing, or distributing for any commercial purpose course lecture notes or video or audio recordings of any course unless authorized by the University in advance and explicitly permitted by the course instructor in writing. The unauthorized sale or commercial distribution of course notes or recordings by a student is a violation of these Policies whether or not it was the student or someone else who prepared the notes or recordings.
+	<br>
+	<br>
+	  </div> <!-- end of course materials-->
+		
+		
+
+    <div class="load-html"  data-source="footer.html"></div>
+
+
+  </body>
+</html>
