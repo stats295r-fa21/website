@@ -4,10 +4,10 @@
 
 
   
-### Advanced R
+### Scientific Computing with R
 University of California Irvine 
 
-Fall 2020 
+Fall 2021
 
 [Dr. Mine Dogucu](https://minedogucu.com)  
 
