@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Working with Data in R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="01b-intro-data_files/header-attrs-2.11/header-attrs.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+
+
+
+
+
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# Working with Data in R
+## Dr. Mine Dogucu
+]
+
+---
+
+class: middle
+
+## Goals
+
+- Data Frames (and Tibbles)
+- Vectors (and lists)
+- The pipe operator
+- Changing variable names &amp; types
+- Summarizing variables
+
+
+
+---
+
+class: center middle
+
+## Review
+
+---
+
+class: middle
+
+## Data Frames
+
+A typical data frame has 
+
+`columns` that each represents a variable.  
+`rows` that each represents an observation.
+
+---
+
+## Functions for Data Frames
+
+
+```r
+head(mtcars)
+```
+
+```
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+```
+
+---
+
+## Functions for Data Frames
+
+
+```r
+tail(mtcars)
+```
+
+```
+                mpg cyl  disp  hp drat    wt qsec vs am gear carb
+Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.7  0  1    5    2
+Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.9  1  1    5    2
+Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.5  0  1    5    4
+Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.5  0  1    5    6
+Maserati Bora  15.0   8 301.0 335 3.54 3.570 14.6  0  1    5    8
+Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.6  1  1    4    2
+```
+
+---
+
+## Functions for Data Frames
+
+
+```r
+glimpse(mtcars)
+```
+
+```
+Rows: 32
+Columns: 11
+$ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8,…
+$ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8,…
+$ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 16…
+$ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180…
+$ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92,…
+$ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.…
+$ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18…
+$ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,…
+$ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,…
+$ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3,…
+$ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2,…
+```
+
+---
+
+## Functions for Data Frames
+
+Note that `summary()` function is useful beyond data frames.
+
+
+```r
+summary(mtcars)
+```
+
+```
+      mpg             cyl             disp             hp       
+ Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+ 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+ Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+ Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+ 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+ Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+      drat             wt             qsec             vs        
+ Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+ 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+ Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+ Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+ 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+ Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+       am              gear            carb      
+ Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+ 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+ Median :0.0000   Median :4.000   Median :2.000  
+ Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+ 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+ Max.   :1.0000   Max.   :5.000   Max.   :8.000  
+```
+---
+
+### `Data Frames` vs. Tibbles
+
+
+```
+                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+
+---
+
+### Data Frames vs. `Tibbles`
+
+
+```
+# A tibble: 32 × 11
+    mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1  21       6   160   110  3.9   2.62  16.5     0     1     4     4
+2  21       6   160   110  3.9   2.88  17.0     0     1     4     4
+3  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
+4  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1
+5  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2
+6  18.1     6   225   105  2.76  3.46  20.2     1     0     3     1
+# … with 26 more rows
+```
+
+---
+
+class: middle inverse center
+.font75[Vectors in R]
+
+---
+
+## Numeric Vectors (integer and double)
+
+`SibSp` Number of Siblings/Spouses Aboard on Titanic
+
+
+```
+# A tibble: 891 × 2
+  SibSp  Fare
+  &lt;int&gt; &lt;dbl&gt;
+1     1  7.25
+2     1 71.3 
+3     0  7.92
+4     1 53.1 
+5     0  8.05
+6     0  8.46
+# … with 885 more rows
+```
+
+---
+
+## Character Vectors
+
+`SibSp` Number of Siblings/Spouses Aboard on Titanic
+
+
+```
+# A tibble: 891 × 2
+  Name                                                Ticket          
+  &lt;chr&gt;                                               &lt;chr&gt;           
+1 Braund, Mr. Owen Harris                             A/5 21171       
+2 Cumings, Mrs. John Bradley (Florence Briggs Thayer) PC 17599        
+3 Heikkinen, Miss. Laina                              STON/O2. 3101282
+4 Futrelle, Mrs. Jacques Heath (Lily May Peel)        113803          
+5 Allen, Mr. William Henry                            373450          
+6 Moran, Mr. James                                    330877          
+# … with 885 more rows
+```
+
+---
+
+## Logical
+
+Do you have any children under eighteen?
+
+
+```
+# A tibble: 1,040 × 1
+  children_under_18
+  &lt;lgl&gt;            
+1 NA               
+2 TRUE             
+3 FALSE            
+4 FALSE            
+5 FALSE            
+6 TRUE             
+# … with 1,034 more rows
+```
+
+---
+
+## Factor
+
+a.k.a. categorical variable in statistics
+
+
+```
+# A tibble: 891 × 1
+  Embarked   
+  &lt;chr&gt;      
+1 Southampton
+2 Cherbourg  
+3 Southampton
+4 Southampton
+5 Southampton
+6 Queenstown 
+# … with 885 more rows
+```
+
+---
+
+## Ordered factor
+
+Is it rude to recline your seat on a plane?
+
+
+```
+# A tibble: 1,040 × 1
+  recline_rude
+  &lt;ord&gt;       
+1 &lt;NA&gt;        
+2 Somewhat    
+3 No          
+4 No          
+5 No          
+6 No          
+# … with 1,034 more rows
+```
+
+
+---
+
+class: middle center 
+
+## Vector Types in R
+
+
+&lt;img src="img/diagram_small.png" width="828" style="display: block; margin: auto;" /&gt;
+
+.footnote[Missing values are represented with NA in R. NULL represents anything that is undefined. Absence of a vector is often represented by NULL.]
+---
+
+class: middle
+
+## Augmented Vectors
+
+Augmented vectors are atomic vectors that have additional metadata. 
+
+`factor` is an integer vector with levels.
+
+`ordered factor` is an integer vector with ordered levels.
+
+`date` is a numeric vector.
+
+`date-time` is numeric vector.
+
+---
+
+class: middle
+
+### Creating Vectors with Multiple Elements
+
+
+
+```r
+78:83
+```
+
+```
+[1] 78 79 80 81 82 83
+```
+
+
+
+```r
+3.4:8.5
+```
+
+```
+[1] 3.4 4.4 5.4 6.4 7.4 8.4
+```
+
+---
+
+class: middle
+
+### Creating Vectors with Multiple Elements
+
+.pull-left[
+
+
+```r
+# A numeric vector
+c(5, 7, 8) 
+```
+
+```
+[1] 5 7 8
+```
+
+
+
+
+```r
+# A character vector
+c("Hello", "World", "today") 
+```
+
+```
+[1] "Hello" "World" "today"
+```
+
+]
+
+.pull-right[
+
+
+```r
+# A character vector
+c("Hello", "World", 5) 
+```
+
+```
+[1] "Hello" "World" "5"    
+```
+
+Note that even if we use numeric and character values within a (atomic) vector, a (atomic) vector has only one type.
+]
+---
+
+class: middle
+
+### Creating Vectors with Multiple Elements
+
+
+
+```r
+seq(from = 2, to = 4, by = 0.3)
+```
+
+```
+[1] 2.0 2.3 2.6 2.9 3.2 3.5 3.8
+```
+
+
+```r
+rep(1, times = 20)
+```
+
+```
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+```
+
+.footnote[Note that in the R output the vector elements are enumerated at the beginning of each line.]
+
+---
+
+### Selecting elements of a vector
+
+
+```r
+names &lt;- c("Menglin", "James", "Gloria")
+
+names[2] 
+```
+
+```
+[1] "James"
+```
+
+```r
+names[2:3]
+```
+
+```
+[1] "James"  "Gloria"
+```
+
+```r
+names[-2]
+```
+
+```
+[1] "Menglin" "Gloria" 
+```
+
+
+---
+
+class: middle
+
+### Selecting Vectors from a Data Frame or Tibble
+
+
+```r
+mtcars$mpg
+```
+
+```
+ [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4
+[16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
+[31] 15.0 21.4
+```
+---
+
+class: inverse middle center
+
+.font75[Lists]
+
+---
+
+class: middle
+
+
+
+```r
+my_list &lt;- list("Gloria",
+                7, 
+                c(8,15.56,15, 16), 
+                c(TRUE, FALSE), 
+                mtcars)
+```
+
+---
+
+class: middle
+
+
+```r
+my_list
+```
+
+```
+[[1]]
+[1] "Gloria"
+
+[[2]]
+[1] 7
+
+[[3]]
+[1]  8.00 15.56 15.00 16.00
+
+[[4]]
+[1]  TRUE FALSE
+
+[[5]]
+                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+
+---
+
+### Selecting elements from a list
+
+
+```r
+my_list[[5]]
+```
+
+```
+                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+
+---
+
+### Selecting elements from a list
+
+
+```r
+my_list[[5]][2]
+```
+
+```
+                    cyl
+Mazda RX4             6
+Mazda RX4 Wag         6
+Datsun 710            4
+Hornet 4 Drive        6
+Hornet Sportabout     8
+Valiant               6
+Duster 360            8
+Merc 240D             4
+Merc 230              4
+Merc 280              6
+Merc 280C             6
+Merc 450SE            8
+Merc 450SL            8
+Merc 450SLC           8
+Cadillac Fleetwood    8
+Lincoln Continental   8
+Chrysler Imperial     8
+Fiat 128              4
+Honda Civic           4
+Toyota Corolla        4
+Toyota Corona         4
+Dodge Challenger      8
+AMC Javelin           8
+Camaro Z28            8
+Pontiac Firebird      8
+Fiat X1-9             4
+Porsche 914-2         4
+Lotus Europa          4
+Ford Pantera L        8
+Ferrari Dino          6
+Maserati Bora         8
+Volvo 142E            4
+```
+
+---
+
+### Selecting elements from a list
+
+
+```r
+my_list[[3]][3]
+```
+
+```
+[1] 15
+```
+
+---
+
+### 
+
+
+```r
+small_list &lt;- list(3, 
+                 c(5, 2, 5.6))
+long_list &lt;- list("STATS 295",
+     small_list)
+long_list
+```
+
+```
+[[1]]
+[1] "STATS 295"
+
+[[2]]
+[[2]][[1]]
+[1] 3
+
+[[2]][[2]]
+[1] 5.0 2.0 5.6
+```
+
+---
+
+## Checking structure of R objects
+
+
+```r
+str(my_list)
+```
+
+```
+List of 5
+ $ : chr "Gloria"
+ $ : num 7
+ $ : num [1:4] 8 15.6 15 16
+ $ : logi [1:2] TRUE FALSE
+ $ :'data.frame':	32 obs. of  11 variables:
+  ..$ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+  ..$ cyl : num [1:32] 6 6 4 6 8 6 8 4 4 6 ...
+  ..$ disp: num [1:32] 160 160 108 258 360 ...
+  ..$ hp  : num [1:32] 110 110 93 110 175 105 245 62 95 123 ...
+  ..$ drat: num [1:32] 3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+  ..$ wt  : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...
+  ..$ qsec: num [1:32] 16.5 17 18.6 19.4 17 ...
+  ..$ vs  : num [1:32] 0 0 1 1 0 1 0 1 1 1 ...
+  ..$ am  : num [1:32] 1 1 1 0 0 0 0 0 0 0 ...
+  ..$ gear: num [1:32] 4 4 4 3 3 3 3 4 4 4 ...
+  ..$ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...
+```
+
+
+---
+
+## Checking structure of R objects
+
+
+```r
+str(long_list)
+```
+
+```
+List of 2
+ $ : chr "STATS 295"
+ $ :List of 2
+  ..$ : num 3
+  ..$ : num [1:3] 5 2 5.6
+```
+
+---
+
+class: inverse middle center
+
+.font75[The pipe operator]
+
+---
+
+class: middle 
+
+.font50[Three solutions to a single problem]
+
+
+---
+
+class: middle
+
+What is the average of 4, 8, 16 approximately?
+
+---
+
+class: middle
+
+1.What is the average of **4, 8, 16** approximately?
+
+---
+
+class: middle
+
+2.What is the **average** of 4, 8, 16 approximately?
+
+---
+
+class: middle
+
+3.What is the average of 4, 8, 16 **approximately**?
+
+---
+
+class: middle 
+
+.font50[Solution 1: Functions within Functions]
+
+---
+
+
+```r
+c(4, 8, 16)
+```
+
+```
+[1]  4  8 16
+```
+
+--
+
+&lt;hr&gt;
+
+
+```r
+mean(c(4, 8, 16))
+```
+
+```
+[1] 9.333333
+```
+
+--
+
+&lt;hr&gt;
+
+
+```r
+round(mean(c(4, 8, 16)))
+```
+
+```
+[1] 9
+```
+
+---
+
+class: middle
+
+**Problem with writing functions within functions**
+
+Things will get messy and more difficult to read and debug as we deal with more complex operations on data.
+
+---
+
+class: middle 
+
+.font50[Solution 2: Creating Objects]
+
+---
+
+class: middle
+
+
+```r
+numbers &lt;- c(4, 8, 16)
+numbers
+```
+
+```
+[1]  4  8 16
+```
+
+--
+
+&lt;hr&gt;
+
+
+```r
+avg_number &lt;- mean(numbers)
+avg_number
+```
+
+```
+[1] 9.333333
+```
+
+--
+
+&lt;hr&gt;
+
+
+```r
+round(avg_number)
+```
+
+```
+[1] 9
+```
+
+---
+
+class: middle
+
+**Problem with creating many objects**
+
+We will end up with too many objects in `Environment`. 
+
+---
+
+class: middle 
+
+.font50[Solution 3: The (forward) Pipe Operator %&gt;% ]
+
+---
+
+class: middle
+
+.font75[Shortcut: &lt;br&gt;Ctrl (Command) + Shift + M]
+
+---
+class: middle
+
+.pull-left[
+
+```r
+c(4, 8, 16) %&gt;% 
+  mean() %&gt;% 
+  round()
+```
+
+```
+[1] 9
+```
+&lt;br&gt;
+]
+
+.pull-right[
+
+Combine 4, 8, and 16 `and then`  
+Take the mean   `and then`  
+Round the output
+
+
+
+]
+
+--
+
+.pull-right[The output of a function becomes the first argument of the next function].
+
+
+---
+
+class: middle
+
+Recall composite functions such as `\(f \circ g(x)\)`?
+
+--
+
+Now we have `\(f \circ g \circ h (x)\)` or `round(mean(c(4, 8, 16)))`
+
+--
+
+.pull-left[
+
+
+```r
+h(x) %&gt;% 
+  g() %&gt;% 
+  f()
+```
+
+]
+
+.pull-right[
+
+
+```r
+c(4, 8, 16) %&gt;% 
+  mean() %&gt;% 
+  round()
+```
+
+]
+
+---
+
+## Fun fact
+
+.left-panel[
+
+```r
+library(magrittr)
+```
+
+&lt;img src="img/pipe-logo.png" width="40%" style="display: block; margin: auto;" /&gt;
+]
+
+.right-panel[
+[Treachery of Images](https://en.wikipedia.org/wiki/The_Treachery_of_Images#/media/File:MagrittePipe.jpg) by René Magritte
+
+&lt;img src="img/magritte.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+.footnote[Image for Treachery of Images is from University of Alabama [website](https://tcf.ua.edu/Classes/Jbutler/T311/Modernism.htm) and used under fair use for educational purposes.]
+]
+
+---
+
+class: inverse middle
+
+.font75[Changing Variable Names and Types]
+
+
+
+---
+
+class: middle
+
+
+```r
+glimpse(lapd)
+```
+
+```
+Rows: 14,824
+Columns: 3
+$ `Department Title` &lt;chr&gt; "Police (LAPD)", "Police (LAPD)", "Police (LAPD)", …
+$ `Base Pay`         &lt;dbl&gt; 119321.60, 113270.70, 148116.00, 78676.87, 109373.6…
+$ `Employment Type`  &lt;chr&gt; "Full Time", "Full Time", "Full Time", "Full Time",…
+```
+
+---
+
+## Cleaning variable names
+
+`clean_names()` changes variable names consistant with the tidyverse style.
+
+
+```r
+clean_names(lapd)
+```
+
+```
+# A tibble: 14,824 × 3
+  department_title base_pay employment_type
+  &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;          
+1 Police (LAPD)     119322. Full Time      
+2 Police (LAPD)     113271. Full Time      
+3 Police (LAPD)     148116  Full Time      
+4 Police (LAPD)      78677. Full Time      
+5 Police (LAPD)     109374. Full Time      
+6 Police (LAPD)      95002. Full Time      
+# … with 14,818 more rows
+```
+
+
+---
+
+## Renaming variables
+
+
+```r
+clean_names(lapd) %&gt;% 
+  rename(dept_title = department_title)
+```
+
+```
+# A tibble: 14,824 × 3
+  dept_title    base_pay employment_type
+  &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;          
+1 Police (LAPD)  119322. Full Time      
+2 Police (LAPD)  113271. Full Time      
+3 Police (LAPD)  148116  Full Time      
+4 Police (LAPD)   78677. Full Time      
+5 Police (LAPD)  109374. Full Time      
+6 Police (LAPD)   95002. Full Time      
+# … with 14,818 more rows
+```
+
+---
+
+## Renaming variables
+
+More than one variable within a single `rename()` function can be renamed.
+
+
+```r
+clean_names(lapd) %&gt;% 
+  rename(dept_title = department_title,
+         emp_type = employment_type)
+```
+
+```
+# A tibble: 14,824 × 3
+  dept_title    base_pay emp_type 
+  &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;    
+1 Police (LAPD)  119322. Full Time
+2 Police (LAPD)  113271. Full Time
+3 Police (LAPD)  148116  Full Time
+4 Police (LAPD)   78677. Full Time
+5 Police (LAPD)  109374. Full Time
+6 Police (LAPD)   95002. Full Time
+# … with 14,818 more rows
+```
+
+---
+
+class: middle
+
+### Making changes to variable types 
+
+`mutate()` function helps make create new variables or make changes to existing ones.
+
+
+```r
+clean_names(lapd) %&gt;% 
+  rename(dept_title = department_title,
+         emp_type = employment_type) %&gt;% 
+  mutate(emp_type2 = as.factor(emp_type))
+```
+
+```
+# A tibble: 14,824 × 4
+  dept_title    base_pay emp_type  emp_type2
+  &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;     &lt;fct&gt;    
+1 Police (LAPD)  119322. Full Time Full Time
+2 Police (LAPD)  113271. Full Time Full Time
+3 Police (LAPD)  148116  Full Time Full Time
+4 Police (LAPD)   78677. Full Time Full Time
+5 Police (LAPD)  109374. Full Time Full Time
+6 Police (LAPD)   95002. Full Time Full Time
+# … with 14,818 more rows
+```
+
+---
+
+class: middle
+
+### Making changes to variable types
+
+We normally would not call the new variable as `emp_type2` instead we would call it `emp_type` to override the older version.
+
+
+```r
+clean_names(lapd) %&gt;% 
+  rename(dept_title = department_title,
+         emp_type = employment_type) %&gt;% 
+  mutate(emp_type = as.factor(emp_type))
+```
+
+```
+# A tibble: 14,824 × 3
+  dept_title    base_pay emp_type 
+  &lt;chr&gt;            &lt;dbl&gt; &lt;fct&gt;    
+1 Police (LAPD)  119322. Full Time
+2 Police (LAPD)  113271. Full Time
+3 Police (LAPD)  148116  Full Time
+4 Police (LAPD)   78677. Full Time
+5 Police (LAPD)  109374. Full Time
+6 Police (LAPD)   95002. Full Time
+# … with 14,818 more rows
+```
+
+---
+
+class: middle
+
+### Making changes to variable types
+
+Changes to other vector types are also possible with the following functions
+
+`as.numeric()`  
+`as.double()`  
+`as.integer()`  
+`as.character()`  
+`as.logical()`  
+
+
+---
+
+Why does lapd object does not reflect any of the data cleaning that we have accomplished? 
+
+
+```r
+lapd
+```
+
+```
+# A tibble: 14,824 × 3
+  `Department Title` `Base Pay` `Employment Type`
+  &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;            
+1 Police (LAPD)         119322. Full Time        
+2 Police (LAPD)         113271. Full Time        
+3 Police (LAPD)         148116  Full Time        
+4 Police (LAPD)          78677. Full Time        
+5 Police (LAPD)         109374. Full Time        
+6 Police (LAPD)          95002. Full Time        
+# … with 14,818 more rows
+```
+
+---
+
+class: middle
+
+We can overwrite the old `lapd` object by assigning the cleaner version of `lapd`
+
+
+```r
+lapd &lt;- clean_names(lapd) %&gt;% 
+  rename(dept_title = department_title,
+         emp_type = employment_type) %&gt;% 
+  mutate(emp_type = as.factor(emp_type))
+```
+
+
+---
+
+class: middle
+
+
+```r
+lapd
+```
+
+```
+# A tibble: 14,824 × 3
+  dept_title    base_pay emp_type 
+  &lt;chr&gt;            &lt;dbl&gt; &lt;fct&gt;    
+1 Police (LAPD)  119322. Full Time
+2 Police (LAPD)  113271. Full Time
+3 Police (LAPD)  148116  Full Time
+4 Police (LAPD)   78677. Full Time
+5 Police (LAPD)  109374. Full Time
+6 Police (LAPD)   95002. Full Time
+# … with 14,818 more rows
+```
+
+
+---
+
+class: middle center inverse
+
+.font75[Summarizing Numeric Variables]
+
+
+---
+
+class: middle
+
+## Numerical Descriptive Functions 
+
+`mean()`  
+`median()`  
+`sd()`  
+`var()`  
+`min()` 
+`max()`
+`quantile()`
+
+---
+
+class: middle
+## Mean
+
+.pull-left[
+
+```r
+summarize(lapd, 
+          mean(base_pay))
+```
+
+```
+# A tibble: 1 × 1
+  `mean(base_pay)`
+             &lt;dbl&gt;
+1           85149.
+```
+]
+
+--
+
+.pull-right[
+
+
+```r
+mean(lapd$base_pay)
+```
+
+```
+[1] 85149.05
+```
+
+]
+
+---
+
+class: middle 
+
+We can get multiple summaries with one `summarize()` function.
+
+
+```r
+summarize(lapd,
+          mean(base_pay),
+          median(base_pay))
+```
+
+```
+# A tibble: 1 × 2
+  `mean(base_pay)` `median(base_pay)`
+             &lt;dbl&gt;              &lt;dbl&gt;
+1           85149.             97601.
+```
+
+Note how the variables names in this table is not easy to read. 
+
+---
+
+class: middle 
+
+In order to display the variable names more legibly in the output, we can assign variable names to numerical summaries (e.g. `mean_base_pay`).
+
+
+```r
+summarize(lapd,
+          mean_base_pay = mean(base_pay),
+          med_base_pay = median(base_pay))
+```
+
+```
+# A tibble: 1 × 2
+  mean_base_pay med_base_pay
+          &lt;dbl&gt;        &lt;dbl&gt;
+1        85149.       97601.
+```
+
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -99,7 +99,11 @@ By the end of this program you should be able to adopt reproducible computing wo
 
 class: middle 
 
-By the end of this course you should be able to adopt reproducible computing workflows in R for all your scientific work (e.g. data storage, analysis, dissemination).
+By the end of this course you should be able to adopt reproducible computing workflows in R for all your scientific work (e.g. data management, analysis, dissemination).
+
+--
+
+I may not teach you every single detail on the topic but you will gain enough foundations to tailor it to your future work.
 
 ---
 
@@ -251,7 +255,7 @@ Object names are all lower case, with words separated by an underscore.
 
 ]
 
-
+[The tidyverse style guide](https://style.tidyverse.org/)
 
 ---
 
@@ -385,7 +389,7 @@ __Hello world__
 
 ---
 
-class: inverse
+class: inverse middle
 
 .font100[`r fontawesome::fa(name = "r-project", fill = "white")` = .R file]
 

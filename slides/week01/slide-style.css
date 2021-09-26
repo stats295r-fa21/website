@@ -130,12 +130,13 @@ h1,h2,h3, h4{
 .footnote{
     position: fixed;
     bottom: 10px;
-    font-size:8px;
+    font-size:16px;
     left:10%;
 
 }
 
 .font30{font-size:30px}
+.font50{font-size:50px}
 .font75{font-size:75px}
 .font100{font-size:100px}
 .font150{font-size:150px}
