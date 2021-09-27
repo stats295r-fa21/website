@@ -54,7 +54,7 @@ class: center middle
         alt="A headshot of a woman with long straight hair and glasses"
         style="width:215px; margin-top:20px; border: 3px solid #BA4A00; padding: 10px;">
         
-
+Josie Jiang <br>
 PhD Student
 <br>
 Department of Statistics 
