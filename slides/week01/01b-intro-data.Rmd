@@ -327,6 +327,48 @@ class: middle
 ```{r}
 mtcars$mpg
 ```
+
+---
+
+class: middle
+
+### Selecting Vectors from a Data Frame or Tibble
+
+```{r}
+mtcars[1,] # selects first row
+```
+
+---
+
+class: middle
+
+### Selecting Vectors from a Data Frame or Tibble
+
+```{r}
+mtcars[1:3,] # selects first through third row
+```
+
+---
+
+class: middle
+
+### Selecting Vectors from a Data Frame or Tibble
+
+```{r}
+mtcars[,5] # selects fifth column
+```
+
+
+---
+
+class: middle
+
+### Selecting Vectors from a Data Frame or Tibble
+
+```{r}
+mtcars[1:2,5] # selects fifth column of first and second row
+```
+
 ---
 
 class: inverse middle center
@@ -640,7 +682,7 @@ glimpse(lapd)
 
 ## Cleaning variable names
 
-`clean_names()` changes variable names consistant with the tidyverse style.
+`clean_names()` changes variable names consistent with the tidyverse style.
 
 ```{r}
 clean_names(lapd)

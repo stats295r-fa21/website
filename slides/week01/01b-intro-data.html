@@ -4,7 +4,7 @@
     <title>Working with Data in R</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Mine Dogucu" />
-    <script src="01b-intro-data_files/header-attrs-2.11/header-attrs.js"></script>
+    <script src="01b-intro-data_files/header-attrs-2.9/header-attrs.js"></script>
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
   </head>
   <body>
@@ -110,17 +110,17 @@ glimpse(mtcars)
 ```
 Rows: 32
 Columns: 11
-$ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8,…
-$ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8,…
-$ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 16…
-$ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180…
-$ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92,…
-$ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.…
-$ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18…
-$ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,…
-$ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,…
-$ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3,…
-$ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2,…
+$ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8,~
+$ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8,~
+$ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 16~
+$ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180~
+$ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92,~
+$ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.~
+$ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18~
+$ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,~
+$ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,~
+$ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3,~
+$ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2,~
 ```
 
 ---
@@ -204,7 +204,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 
 
 ```
-# A tibble: 32 × 11
+# A tibble: 32 x 11
     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1  21       6   160   110  3.9   2.62  16.5     0     1     4     4
@@ -213,7 +213,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 4  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1
 5  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2
 6  18.1     6   225   105  2.76  3.46  20.2     1     0     3     1
-# … with 26 more rows
+# ... with 26 more rows
 ```
 
 ---
@@ -229,7 +229,7 @@ class: middle inverse center
 
 
 ```
-# A tibble: 891 × 2
+# A tibble: 891 x 2
   SibSp  Fare
   &lt;int&gt; &lt;dbl&gt;
 1     1  7.25
@@ -238,7 +238,7 @@ class: middle inverse center
 4     1 53.1 
 5     0  8.05
 6     0  8.46
-# … with 885 more rows
+# ... with 885 more rows
 ```
 
 ---
@@ -249,7 +249,7 @@ class: middle inverse center
 
 
 ```
-# A tibble: 891 × 2
+# A tibble: 891 x 2
   Name                                                Ticket          
   &lt;chr&gt;                                               &lt;chr&gt;           
 1 Braund, Mr. Owen Harris                             A/5 21171       
@@ -258,7 +258,7 @@ class: middle inverse center
 4 Futrelle, Mrs. Jacques Heath (Lily May Peel)        113803          
 5 Allen, Mr. William Henry                            373450          
 6 Moran, Mr. James                                    330877          
-# … with 885 more rows
+# ... with 885 more rows
 ```
 
 ---
@@ -269,7 +269,7 @@ Do you have any children under eighteen?
 
 
 ```
-# A tibble: 1,040 × 1
+# A tibble: 1,040 x 1
   children_under_18
   &lt;lgl&gt;            
 1 NA               
@@ -278,7 +278,7 @@ Do you have any children under eighteen?
 4 FALSE            
 5 FALSE            
 6 TRUE             
-# … with 1,034 more rows
+# ... with 1,034 more rows
 ```
 
 ---
@@ -289,7 +289,7 @@ a.k.a. categorical variable in statistics
 
 
 ```
-# A tibble: 891 × 1
+# A tibble: 891 x 1
   Embarked   
   &lt;chr&gt;      
 1 Southampton
@@ -298,7 +298,7 @@ a.k.a. categorical variable in statistics
 4 Southampton
 5 Southampton
 6 Queenstown 
-# … with 885 more rows
+# ... with 885 more rows
 ```
 
 ---
@@ -309,7 +309,7 @@ Is it rude to recline your seat on a plane?
 
 
 ```
-# A tibble: 1,040 × 1
+# A tibble: 1,040 x 1
   recline_rude
   &lt;ord&gt;       
 1 &lt;NA&gt;        
@@ -318,7 +318,7 @@ Is it rude to recline your seat on a plane?
 4 No          
 5 No          
 6 No          
-# … with 1,034 more rows
+# ... with 1,034 more rows
 ```
 
 
@@ -495,6 +495,74 @@ mtcars$mpg
 [16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
 [31] 15.0 21.4
 ```
+
+---
+
+class: middle
+
+### Selecting Vectors from a Data Frame or Tibble
+
+
+```r
+mtcars[1,] # selects first row
+```
+
+```
+          mpg cyl disp  hp drat   wt  qsec vs am gear carb
+Mazda RX4  21   6  160 110  3.9 2.62 16.46  0  1    4    4
+```
+
+---
+
+class: middle
+
+### Selecting Vectors from a Data Frame or Tibble
+
+
+```r
+mtcars[1:3,] # selects first through third row
+```
+
+```
+               mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+```
+
+---
+
+class: middle
+
+### Selecting Vectors from a Data Frame or Tibble
+
+
+```r
+mtcars[,5] # selects fifth column
+```
+
+```
+ [1] 3.90 3.90 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 3.92 3.07 3.07 3.07 2.93
+[16] 3.00 3.23 4.08 4.93 4.22 3.70 2.76 3.15 3.73 3.08 4.08 4.43 3.77 4.22 3.62
+[31] 3.54 4.11
+```
+
+
+---
+
+class: middle
+
+### Selecting Vectors from a Data Frame or Tibble
+
+
+```r
+mtcars[1:2,5] # selects fifth column of first and second row
+```
+
+```
+[1] 3.9 3.9
+```
+
 ---
 
 class: inverse middle center
@@ -1010,16 +1078,16 @@ glimpse(lapd)
 ```
 Rows: 14,824
 Columns: 3
-$ `Department Title` &lt;chr&gt; "Police (LAPD)", "Police (LAPD)", "Police (LAPD)", …
-$ `Base Pay`         &lt;dbl&gt; 119321.60, 113270.70, 148116.00, 78676.87, 109373.6…
-$ `Employment Type`  &lt;chr&gt; "Full Time", "Full Time", "Full Time", "Full Time",…
+$ `Department Title` &lt;chr&gt; "Police (LAPD)", "Police (LAPD)", "Police (LAPD)", ~
+$ `Base Pay`         &lt;dbl&gt; 119321.60, 113270.70, 148116.00, 78676.87, 109373.6~
+$ `Employment Type`  &lt;chr&gt; "Full Time", "Full Time", "Full Time", "Full Time",~
 ```
 
 ---
 
 ## Cleaning variable names
 
-`clean_names()` changes variable names consistant with the tidyverse style.
+`clean_names()` changes variable names consistent with the tidyverse style.
 
 
 ```r
@@ -1027,7 +1095,7 @@ clean_names(lapd)
 ```
 
 ```
-# A tibble: 14,824 × 3
+# A tibble: 14,824 x 3
   department_title base_pay employment_type
   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;          
 1 Police (LAPD)     119322. Full Time      
@@ -1036,7 +1104,7 @@ clean_names(lapd)
 4 Police (LAPD)      78677. Full Time      
 5 Police (LAPD)     109374. Full Time      
 6 Police (LAPD)      95002. Full Time      
-# … with 14,818 more rows
+# ... with 14,818 more rows
 ```
 
 
@@ -1051,7 +1119,7 @@ clean_names(lapd) %&gt;%
 ```
 
 ```
-# A tibble: 14,824 × 3
+# A tibble: 14,824 x 3
   dept_title    base_pay employment_type
   &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;          
 1 Police (LAPD)  119322. Full Time      
@@ -1060,7 +1128,7 @@ clean_names(lapd) %&gt;%
 4 Police (LAPD)   78677. Full Time      
 5 Police (LAPD)  109374. Full Time      
 6 Police (LAPD)   95002. Full Time      
-# … with 14,818 more rows
+# ... with 14,818 more rows
 ```
 
 ---
@@ -1077,7 +1145,7 @@ clean_names(lapd) %&gt;%
 ```
 
 ```
-# A tibble: 14,824 × 3
+# A tibble: 14,824 x 3
   dept_title    base_pay emp_type 
   &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;    
 1 Police (LAPD)  119322. Full Time
@@ -1086,7 +1154,7 @@ clean_names(lapd) %&gt;%
 4 Police (LAPD)   78677. Full Time
 5 Police (LAPD)  109374. Full Time
 6 Police (LAPD)   95002. Full Time
-# … with 14,818 more rows
+# ... with 14,818 more rows
 ```
 
 ---
@@ -1106,7 +1174,7 @@ clean_names(lapd) %&gt;%
 ```
 
 ```
-# A tibble: 14,824 × 4
+# A tibble: 14,824 x 4
   dept_title    base_pay emp_type  emp_type2
   &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;     &lt;fct&gt;    
 1 Police (LAPD)  119322. Full Time Full Time
@@ -1115,7 +1183,7 @@ clean_names(lapd) %&gt;%
 4 Police (LAPD)   78677. Full Time Full Time
 5 Police (LAPD)  109374. Full Time Full Time
 6 Police (LAPD)   95002. Full Time Full Time
-# … with 14,818 more rows
+# ... with 14,818 more rows
 ```
 
 ---
@@ -1135,7 +1203,7 @@ clean_names(lapd) %&gt;%
 ```
 
 ```
-# A tibble: 14,824 × 3
+# A tibble: 14,824 x 3
   dept_title    base_pay emp_type 
   &lt;chr&gt;            &lt;dbl&gt; &lt;fct&gt;    
 1 Police (LAPD)  119322. Full Time
@@ -1144,7 +1212,7 @@ clean_names(lapd) %&gt;%
 4 Police (LAPD)   78677. Full Time
 5 Police (LAPD)  109374. Full Time
 6 Police (LAPD)   95002. Full Time
-# … with 14,818 more rows
+# ... with 14,818 more rows
 ```
 
 ---
@@ -1172,7 +1240,7 @@ lapd
 ```
 
 ```
-# A tibble: 14,824 × 3
+# A tibble: 14,824 x 3
   `Department Title` `Base Pay` `Employment Type`
   &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;            
 1 Police (LAPD)         119322. Full Time        
@@ -1181,7 +1249,7 @@ lapd
 4 Police (LAPD)          78677. Full Time        
 5 Police (LAPD)         109374. Full Time        
 6 Police (LAPD)          95002. Full Time        
-# … with 14,818 more rows
+# ... with 14,818 more rows
 ```
 
 ---
@@ -1209,7 +1277,7 @@ lapd
 ```
 
 ```
-# A tibble: 14,824 × 3
+# A tibble: 14,824 x 3
   dept_title    base_pay emp_type 
   &lt;chr&gt;            &lt;dbl&gt; &lt;fct&gt;    
 1 Police (LAPD)  119322. Full Time
@@ -1218,7 +1286,7 @@ lapd
 4 Police (LAPD)   78677. Full Time
 5 Police (LAPD)  109374. Full Time
 6 Police (LAPD)   95002. Full Time
-# … with 14,818 more rows
+# ... with 14,818 more rows
 ```
 
 
@@ -1256,7 +1324,7 @@ summarize(lapd,
 ```
 
 ```
-# A tibble: 1 × 1
+# A tibble: 1 x 1
   `mean(base_pay)`
              &lt;dbl&gt;
 1           85149.
@@ -1292,7 +1360,7 @@ summarize(lapd,
 ```
 
 ```
-# A tibble: 1 × 2
+# A tibble: 1 x 2
   `mean(base_pay)` `median(base_pay)`
              &lt;dbl&gt;              &lt;dbl&gt;
 1           85149.             97601.
@@ -1314,7 +1382,7 @@ summarize(lapd,
 ```
 
 ```
-# A tibble: 1 × 2
+# A tibble: 1 x 2
   mean_base_pay med_base_pay
           &lt;dbl&gt;        &lt;dbl&gt;
 1        85149.       97601.
