@@ -384,6 +384,7 @@ class: middle
 ?theme
 ```
 
+[A blog post on theme elements](https://cmdlinetips.com/2021/05/tips-to-customize-text-color-font-size-in-ggplot2-with-element_text/)
 
 ---
 
@@ -498,8 +499,6 @@ class: middle
 
 ```{r echo = FALSE, message = FALSE}
 library(tidyverse)
-
-
 ```
 
 ```{r message = FALSE}
