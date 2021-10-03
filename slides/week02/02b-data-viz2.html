@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visaluzing Data:  Part II</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="02b-data-viz2_files/header-attrs-2.11/header-attrs.js"></script>
+    <link href="02b-data-viz2_files/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="02b-data-viz2_files/panelset-0.2.6/panelset.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+
+
+
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# Visaluzing Data: &lt;br&gt;Part II
+## Dr. Mine Dogucu
+]
+
+---
+
+class: middle
+
+## Review
+
+Quiz questions
+
+---
+
+class: middle
+
+## Outline
+
+- More ggplot
+
+- Accessible Data Visualization
+
+
+
+---
+
+
+
+
+
+
+
+---
+
+class: middle 
+ 
+
+.panelset[
+.panel[
+
+.panel-name[Plot]
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[English]
+- Using the `penguins` data,   
+- Map `bill depth` to x-axis, `bill length` to y-axis, `species` to shape and color.
+- Add a layer of points and set the size of the points to 4.
+]
+
+.panel[
+.panel-name[R]
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) 
+```
+
+]
+
+]
+
+
+---
+
+class: middle 
+
+## Labs
+
+
+.panelset[
+.panel[
+
+.panel-name[Plot]
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[English]
+- Using the `penguins` data,   
+- Map `bill depth` to x-axis, `bill length` to y-axis, `species` to shape.
+- Add a layer of points and set the size of the points to 4.
+- .highlight-text[Add labels to x-axis (Bill Depth(mm)), y-axis (Bill Length(mm)), and the title of the plot (Palmer Penguins).]
+
+
+
+.panel[
+.panel-name[R]
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+* labs(x = "Bill Depth (mm)",
+*      y = "Bill Length (mm)",
+*      title = "Palmer Penguins")
+```
+
+]
+
+]
+
+
+
+]
+
+---
+
+class: middle
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)", 
+       title = "Palmer Penguins") +
+* theme_bw()
+```
+
+]
+
+.right-panel[
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: middle
+
+## Themes
+
+.panelset[
+
+
+.panel[
+
+.panel-name[`theme_gray()`]
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[`theme_bw()`]
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[`theme_classic()`]
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+
+.panel-name[`theme_dark()`]
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[`theme_minimal()`]
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.panel[
+.panel-name[`theme_void()`]
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+class: middle 
+
+.left-panel[
+
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point() +
+  labs(x = "Bill Depth (mm)", 
+       y = "Bill Length (mm)", 
+       title = "Palmer Penguins") +
+  theme_bw() +
+* theme(text = element_text(size=20))
+```
+
+]
+
+.right-panel[
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+class: middle
+
+
+```r
+?theme
+```
+
+
+---
+
+class: middle 
+ 
+
+.left-panel[
+
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+* facet_grid(.~species)
+```
+
+]
+
+.right-panel[
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle 
+ 
+
+.left-panel[
+
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+* facet_grid(species~.)
+```
+
+]
+
+.right-panel[
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm)) +
+  geom_point() +
+* xlim(0, 30) +
+* ylim(0,70)
+```
+
+]
+
+.right-panel[
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+class: middle
+
+[Top Ten Dos and Don't for Charts and Graphs](https://guides.lib.uci.edu/datavis/do)
+
+---
+
+class: middle
+
+Check out [the ggplot flipbook](https://evamaerey.github.io/ggplot_flipbook/ggplot_flipbook_xaringan.html#1) for some inspiration. 
+Find your favorite new function/feature. 
+Share it with your neighbor.
+
+
+---
+
+class: middle 
+
+
+
+
+```r
+library(maps)
+usa &lt;- map_data("usa")
+glimpse(usa)
+```
+
+```
+Rows: 7,243
+Columns: 6
+$ long      &lt;dbl&gt; -101.4078, -101.3906, -101.…
+$ lat       &lt;dbl&gt; 29.74224, 29.74224, 29.6505…
+$ group     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ order     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, …
+$ region    &lt;chr&gt; "main", "main", "main", "ma…
+$ subregion &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA,…
+```
+
+---
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+ggplot(data = usa,
+       aes(x = long, 
+           y = lat)) 
+```
+]
+
+.pull-right[
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+ggplot(data = usa,
+       aes(x = long, 
+           y = lat)) + 
+  geom_polygon() 
+```
+]
+
+.pull-right[
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+ggplot(data = usa,
+       aes(x = long, 
+           y = lat)) + 
+  geom_polygon() + 
+  coord_fixed(1.4)
+```
+]
+
+.pull-right[
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+ggplot(data = usa,
+       aes(x = long, 
+           y = lat)) + 
+  geom_polygon(fill = NA,
+               color = "steelblue") + 
+  coord_fixed(1.4)
+```
+]
+
+.pull-right[
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+ggplot(data = usa,
+       aes(x = long, 
+           y = lat)) + 
+  geom_polygon(fill = NA, 
+               color = "steelblue",
+               aes(group = group))  + 
+  coord_fixed(1.4)
+```
+]
+
+.pull-right[
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle
+
+
+```r
+location &lt;- c("Northampton", "Columbus", "Sarasota","Irvine" )
+  
+long &lt;- c(-72.6412, -82.998795, -82.538602, -117.824719)
+
+lat &lt;- c(42.3251, 39.961178, 27.336483, 33.685908)
+
+pop &lt;- c(28726, 892533, 57738, 282572)
+         
+
+home &lt;- tibble::tibble(location = location,
+                 lat = lat,
+                 long = long,
+                 pop = pop)
+```
+
+---
+
+class: middle
+
+
+```r
+home
+```
+
+```
+# A tibble: 4 × 4
+  location      lat   long    pop
+  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 Northampton  42.3  -72.6  28726
+2 Columbus     40.0  -83.0 892533
+3 Sarasota     27.3  -82.5  57738
+4 Irvine       33.7 -118.  282572
+```
+
+---
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+usa_map &lt;- 
+  ggplot(data = usa,
+         aes(x = long, 
+             y = lat)) + 
+  geom_polygon(fill = NA, color = "steelblue",
+               aes(group = group)) + 
+  coord_fixed(1.4)
+```
+]
+
+.pull-right[
+
+
+]
+
+
+---
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+usa_map +
+  geom_point(data = home, 
+             aes(x = long,
+                 y = lat, 
+                 color = pop))
+```
+]
+
+.pull-right[
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+usa_map +
+  geom_point(data = home, 
+             aes(x = long,
+                 y = lat, 
+                 size = pop))
+```
+]
+
+.pull-right[
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle 
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+states &lt;- map_data("state")
+ggplot(data = states,
+       aes(x = long, 
+           y = lat,
+           fill = region)) + 
+  geom_polygon(aes(group = group))  + 
+  coord_fixed(1.4) +
+  guides(fill = "none")
+```
+]
+
+.pull-right[
+
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+class: middle 
+
+`library(sf)`
+
+[Maps Chapter from ggplot2 book](https://ggplot2-book.org/maps.html)
+
+
+---
+
+class: middle center inverse
+
+.font75[Making Accessible Visualizations]
+
+---
+
+class: middle
+
+[Color blindness simulation](https://www.color-blindness.com/coblis-color-blindness-simulator/): red-blind/protanopia
+
+&lt;img src="img/red-blind.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+[Color blindness simulation](https://www.color-blindness.com/coblis-color-blindness-simulator/): green-blind/deuteranopia
+
+&lt;img src="img/green-blind.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: middle
+
+[Color blindness simulation](https://www.color-blindness.com/coblis-color-blindness-simulator/): blue-blind/tritanopia
+
+&lt;img src="img/blue-blind.png" width="60%" style="display: block; margin: auto;" /&gt;
+---
+
+class: middle 
+
+
+```r
+palette.colors(palette = "Okabe-Ito")
+```
+
+```
+        black        orange       skyblue 
+    "#000000"     "#E69F00"     "#56B4E9" 
+  bluishgreen        yellow          blue 
+    "#009E73"     "#F0E442"     "#0072B2" 
+   vermillion reddishpurple          gray 
+    "#D55E00"     "#CC79A7"     "#999999" 
+```
+
+[Okabe-Ito color palette](https://jfly.uni-koeln.de/color/) allows us to make figures that are colorblind friendly.
+You can use the HEX code printed for selecting colors.
+---
+
+class: middle
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point(size = 4) +
+  facet_grid(species~.) +
+* scale_color_manual(values =
+*                     c("#E69F00",
+*                       "#009E73",
+*                       "#56B4E9"))
+```
+
+]
+
+.right-panel[
+&lt;img src="02b-data-viz2_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+
+class: middle 
+
+## Detour: R Markdown chunk options
+
+```{r, echo=TRUE, message=FALSE}
+```
+---
+
+
+class: center middle 
+
+## (some) Chunk Options in R Markdown
+
+&lt;table align = "center"&gt;
+
+&lt;tr&gt;
+
+&lt;td&gt;echo = FALSE&lt;/td&gt;
+&lt;td&gt;hides the code&lt;/td&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+
+&lt;td&gt;message = FALSE&lt;/td&gt;
+&lt;td&gt;hides messages&lt;/td&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+
+&lt;td&gt;warning = FALSE&lt;/td&gt;
+&lt;td&gt;hides warning&lt;/td&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+
+&lt;td&gt;error = TRUE&lt;/td&gt;
+&lt;td&gt;renders despite errors and displays the error&lt;/td&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+
+&lt;td&gt;cap = "Some figure caption"&lt;/td&gt;
+&lt;td&gt;creates a figure caption&lt;/td&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+
+&lt;td&gt;alt = "Some alternate text for figure"&lt;/td&gt;
+&lt;td&gt;creates alternate text for figures&lt;/td&gt;
+
+&lt;/tr&gt;
+
+
+
+&lt;/table&gt;
+
+
+---
+
+class: middle 
+
+## Alternate Text
+
+"Alt text" describes contents of an image. 
+It is used in HTML pages such as the R Markdown outputs we have been writing. 
+Screen-readers cannot read images but can read alt text.
+Alt text has to be provided and cannot magically appear. 
+
+---
+
+---
+
+class: middle
+
+## Potential Content of Alternate Text for Data Visualization
+
+1. Data source/frame
+2. Variables and axes information including units
+3. The plot type
+4. The message that the plot conveys.
+
+---
+
+class: middle
+
+Please complete the in-class activity provided to you in lecture notes.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

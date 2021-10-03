@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visaluzing Data:  Part I</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="02a-data-viz_files/header-attrs-2.11/header-attrs.js"></script>
+    <link href="02a-data-viz_files/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="02a-data-viz_files/panelset-0.2.6/panelset.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+
+
+
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# Visaluzing Data: &lt;br&gt;Part I
+## Dr. Mine Dogucu
+]
+
+---
+
+class: middle
+
+## Review
+
+Quiz questions  
+Homework  
+Lecture on Descriptive Statistics 
+
+---
+
+
+class: middle
+
+[How LGBTQ+ hate crime is committed by young people against young people](https://www.bbc.com/news/uk-46543874)
+
+[Why Time Flies](https://maximiliankiener.com/digitalprojects/time/)
+
+[Mandatory Paid Vacation](https://www.instagram.com/p/CE1kpM5FhWR/?utm_source=ig_web_copy_link)
+
+[Why are K-pop groups so big?](https://pudding.cool/2020/10/kpop/)
+
+---
+
+class: middle
+
+Data Visualizations
+
+- are graphical representations of data
+
+--
+
+- use different colors, shapes, and the coordinate system to summarize data
+
+--
+
+- tell a story
+
+--
+
+- are useful for exploring data
+
+
+---
+
+class:inverse middle
+
+.font75[Visuals with a Single Categorical Variable]
+
+---
+
+## Bar plot
+
+.pull-left[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class:inverse middle
+
+.font75[Visuals with a Single Numeric Variable]
+
+---
+
+## Box plot
+
+.pull-left[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.pull-right[
+
+- The horizontal line inside the box represents the median.
+- The box itself represents the middle 50% of the data with Q3 on the upper end and Q1 on the lower end. 
+- Whiskers extend from the box. They can extend up to 1.5 IQR away from the box (i.e. away from Q1 and Q3). 
+- The points are potential outliers that represent babies with really low or high birth weight.
+
+]
+
+---
+
+## Histogram
+
+.pull-left[
+
+Bin width = 5 ounces
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+Bin width = 20 ounces
+
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: middle
+
+[Exploring Histograms Interactively](http://tinlizzie.org/histograms/)
+
+---
+
+class: middle center
+
+[There is no "best" number of bins](https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width)
+
+---
+
+class: middle
+
+## Etymology
+
+
+__histo__ comes from the Greek word _histos_ that literally means "anything set up right".
+
+__gram__: comes from the Greek word _gramma_ which means "that which is drawn".
+
+.footnote[Online Etymology Dictionary]
+
+---
+
+## Histogram vs. Boxplot
+
+.pull-left[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-8-1.gif" style="display: block; margin: auto;" /&gt;
+
+Tail tells the tale.
+
+]
+
+
+.pull-right[
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-9-1.gif" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: middle
+
+## In pairs
+
+Discuss:
+
+- In right-skewed distributions mean &gt; median, true or false?
+- In left-skewed distributions mean &gt; median, true or false?
+
+---
+
+class: middle
+
+.pull-left[
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: inverse middle center
+
+.font75[Visuals with Two Categorical Variables]
+
+---
+
+class: middle 
+
+## Standardized Bar Plot
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+## Dodged Bar Plot
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: middle inverse
+
+.font75[Visuals with a single numerical and single categorical variable.]
+
+
+
+---
+
+## Side-by-side box plots
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse middle
+
+.font75[Visuals with Two Numerical Variables]
+
+
+---
+
+## Scatter plots
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+Length of gestation can **possibly** eXplain a baby's birth weight. 
+Gestation is the eXplanatory variable and is shown on the x-axis.
+Birth weight is the response variable and is shown on the y-axis.
+
+---
+
+## Linear Relationship
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+Later on we will start statistical modeling during which we will numerically define the relationship between gestation and birth weight. 
+For now we can say that this relationship looks positive and moderate.
+
+
+---
+
+class: middle
+
+__gg__plot is based on __g__rammar of __g__raphics.
+
+&lt;img src="img/grammar_graphics.jpeg" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Data
+
+
+```r
+glimpse(titanic)
+```
+
+```
+Rows: 891
+Columns: 6
+$ survived &lt;lgl&gt; FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, TR…
+$ pclass   &lt;chr&gt; "Third", "First", "Third", "First", "Third", "Third", "First"…
+$ sex      &lt;fct&gt; sex, sex, sex, sex, sex, sex, sex, sex, sex, sex, sex, sex, s…
+$ age      &lt;dbl&gt; 22, 38, 26, 35, 35, NA, 54, 2, 27, 14, 4, 58, 20, 39, 14, 55,…
+$ fare     &lt;dbl&gt; 7.2500, 71.2833, 7.9250, 53.1000, 8.0500, 8.4583, 51.8625, 21…
+$ embarked &lt;fct&gt; Southampton, Cherbourg, Southampton, Southampton, Southampton…
+```
+
+.footnote[The data frame has been cleaned for you.]
+
+---
+
+class:inverse middle
+
+.font75[Visualizing a Single Categorical Variable]
+
+---
+
+class: middle
+
+.left-panel[
+&lt;br&gt;
+&lt;br&gt;
+If you could speak to R in English, how would you tell R to make this plot for you?
+
+OR
+
+If you had the data and had to draw this bar plot by hand, what would you do?
+
+]
+
+.right-panel[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle
+
+**3 Steps of Making a Basic ggplot**
+
+1.Pick data
+
+2.Map data onto aesthetics
+
+
+3.Add the geometric layer
+
+
+
+---
+class: middle
+
+### Step 1 - Pick Data
+
+.pull-left[
+
+```r
+ggplot(data = titanic)
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: middle
+
+### Step 2 - Map Data to Aesthetics
+
+.pull-left[
+
+```r
+ggplot(data = titanic,
+*      aes(x = pclass))
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: middle
+
+### Step 3 - Add the Geometric Layer
+
+.pull-left[
+
+```r
+ggplot(data = titanic,
+       aes(x = pclass)) +
+* geom_bar()
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+
+class: middle 
+
+.panelset[
+
+.panel[
+.panel-name[Plot]
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[English]
+
+- Create a ggplot using the `titanic` data frame.
+- Map the `pclass` to the x-axis. 
+- Add a layer of a bar plot.
+
+]
+
+.panel[
+.panel-name[R]
+
+```r
+ggplot(data = titanic,
+       aes(x = pclass)) +
+  geom_bar()
+```
+
+]
+
+]
+---
+
+class:inverse middle
+
+.font75[Visualizing a Single Numeric Variable]
+
+---
+
+class: middle
+
+.panelset[
+
+.panel[
+.panel-name[Plot]
+
+```
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[English]
+
+- Create a ggplot using the `titanic` data frame.
+- Map the `fare` to the x-axis. 
+- Add a layer of a histogram.
+
+]
+
+.panel[
+.panel-name[R]
+
+```r
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram() 
+```
+
+]
+
+]
+
+---
+class: middle
+
+### Step 1 - Pick Data
+
+.pull-left[
+
+```r
+ggplot(data = titanic)
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: middle
+
+### Step 2 - Map Data to Aesthetics
+
+.pull-left[
+
+```r
+ggplot(data = titanic,
+*      aes(x = fare))
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: middle
+
+### Step 3 - Add the Geometric Layer
+
+.pull-left[
+
+```r
+ggplot(data = titanic,
+       aes(x = fare)) +
+* geom_histogram()
+```
+]
+
+.pull-right[
+
+
+```
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## What is this warning?
+
+
+```
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+
+```r
+ggplot(data = titanic,
+       aes(x = fare)) +
+* geom_histogram(binwidth = 15)
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: middle
+
+
+.panelset[
+.panel[.panel-name[binwidth = 15]
+
+.left-panel[
+
+
+]
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[binwidth = 50]
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[.panel-name[binwidth = 100]
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+]
+
+---
+
+class: middle center
+
+[There is no "best" number of bins](https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width)
+
+
+---
+
+class: middle center
+
+
+.font150[
+🌈
+] 
+
+Pick your favorite color(s) from the list at:
+
+[bit.ly/colors-r](https://bit.ly/colors-r)
+
+---
+
+
+```r
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 15, 
+*                color = "white")
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 15, 
+*                fill = "darkred")
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+ggplot(data = titanic,
+       aes(x = fare)) +
+  geom_histogram(binwidth = 15, 
+*                color = "white",
+*                fill = "darkred")
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse middle center
+
+.font75[Visualizing Two Categorical Variables]
+
+---
+
+## Stacked Bar-Plot
+
+.pull-left[
+
+
+```r
+ggplot(data = titanic,
+       aes(x = pclass, 
+*          fill = survived)) +
+  geom_bar() 
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Standardized Bar Plot
+
+.pull-left[
+
+
+```r
+ggplot(data = titanic,
+       aes(x = pclass, 
+           fill = survived)) + 
+* geom_bar(position = "fill")
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[Note that y-axis is no longer count but we will learn how to change that later.]
+
+---
+
+## Dodged Bar Plot
+
+.pull-left[
+
+
+```r
+ggplot(data = titanic,
+       aes(x = pclass, 
+           fill = survived)) + 
+* geom_bar(position = "dodge")
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[Note that y-axis is no longer count but we will change that later.]
+
+
+---
+
+## New Data
+
+&lt;img src="img/penguins.png" width="667" style="display: block; margin: auto;" /&gt;
+
+.footnote[Artwork by [@allison_horst](https://twitter.com/allison_horst) ]
+
+---
+
+## New Data
+
+
+```r
+glimpse(penguins)
+```
+
+```
+Rows: 344
+Columns: 8
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
+$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
+$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
+$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…
+```
+
+---
+
+&lt;img src="img/penguin_bill.png" width="1036" style="display: block; margin: auto;" /&gt;
+
+.footnote[Artwork by [@allison_horst](https://twitter.com/allison_horst) ]
+
+
+---
+
+class: middle inverse
+
+.font75[Visualizing a single numerical and single categorical variable.]
+
+---
+
+class: middle 
+
+.panelset[
+
+.panel[
+.panel-name[Plot]
+
+```
+Warning: Removed 2 rows containing non-finite values (stat_ydensity).
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[English]
+
+- Create a ggplot using the `penguins` data frame.
+- Map the `species` to the x-axis and `bill_length_mm` to the y-axis. 
+- Add a layer of a violin plot.
+
+]
+
+.panel[
+.panel-name[R]
+
+```r
+ggplot(penguins,
+       aes(x = species,
+           y = bill_length_mm))  +
+  geom_violin()
+```
+
+]
+
+]
+
+---
+
+
+class: middle 
+
+.panelset[
+
+.panel[
+.panel-name[Plot]
+
+```
+Warning: Removed 2 rows containing non-finite values (stat_boxplot).
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[English]
+
+- Create a ggplot using the `penguins` data frame.
+- Map the `species` to the x-axis and `bill_length_mm` to the y-axis. 
+- Add a layer of a box plot.
+
+]
+
+.panel[
+.panel-name[R]
+
+```r
+ggplot(penguins,
+       aes(x = species,
+           y = bill_length_mm))  +
+  geom_boxplot()
+```
+
+]
+
+]
+
+
+---
+
+class: middle
+
+.pull-left[
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-57-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-58-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[Note: Violin plots display densities, not counts!]
+---
+
+class: middle
+
+.pull-left[
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-59-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-60-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[Note: Violin plots display densities, not counts!]
+---
+class: inverse middle
+
+.font75[Visualizing Two Numerical Variables]
+
+---
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm))  +
+  geom_point()
+```
+
+]
+
+.right-panel[
+
+```
+Warning: Removed 2 rows containing missing values (geom_point).
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-62-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+&lt;img src="img/ggplot-summary.jpeg" width="95%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: middle
+
+## Practice
+
+Using either the `babies`, `titanic` or `penguins` data frame ask a question that you are interested in answering. Visualize data to get a visual answer to the question. What is the visual telling you? Note all of this down in your lecture notes.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
