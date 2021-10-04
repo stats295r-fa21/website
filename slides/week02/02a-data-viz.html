@@ -4,7 +4,7 @@
     <title>Visaluzing Data:  Part I</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Mine Dogucu" />
-    <script src="02a-data-viz_files/header-attrs-2.11/header-attrs.js"></script>
+    <script src="02a-data-viz_files/header-attrs-2.9/header-attrs.js"></script>
     <link href="02a-data-viz_files/panelset-0.2.6/panelset.css" rel="stylesheet" />
     <script src="02a-data-viz_files/panelset-0.2.6/panelset.js"></script>
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
@@ -14,6 +14,8 @@
 
 
 class: title-slide
+
+
 
 
 
@@ -35,9 +37,7 @@ class: middle
 
 ## Review
 
-Quiz questions  
-Homework  
-Lecture on Descriptive Statistics 
+
 
 ---
 
@@ -184,18 +184,10 @@ Tail tells the tale.
 
 ]
 
----
 
-class: middle
-
-## In pairs
-
-Discuss:
-
-- In right-skewed distributions mean &gt; median, true or false?
-- In left-skewed distributions mean &gt; median, true or false?
 
 ---
+
 
 class: middle
 
@@ -205,11 +197,24 @@ class: middle
 ]
 
 .pull-right[
-
 &lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[Note: Violin plots display densities, not counts!]
+---
+
+class: middle
+
+.pull-left[
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
+.pull-right[
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[Note: Violin plots display densities, not counts!]
 ---
 
 class: inverse middle center
@@ -222,7 +227,7 @@ class: middle
 
 ## Standardized Bar Plot
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -230,7 +235,7 @@ class: middle
 
 ## Dodged Bar Plot
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -245,7 +250,7 @@ class: middle inverse
 
 ## Side-by-side box plots
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -258,7 +263,7 @@ class: inverse middle
 
 ## Scatter plots
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
 
 Length of gestation can **possibly** eXplain a baby's birth weight. 
 Gestation is the eXplanatory variable and is shown on the x-axis.
@@ -268,10 +273,28 @@ Birth weight is the response variable and is shown on the y-axis.
 
 ## Linear Relationship
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+.pull-left[
 
-Later on we will start statistical modeling during which we will numerically define the relationship between gestation and birth weight. 
-For now we can say that this relationship looks positive and moderate.
+
+```r
+ggplot(babies,
+       aes(x = gestation,
+           y = bwt))  +
+  geom_point() +
+  labs(x = "Gestation (days)",
+       y = "Birth weight (ounces)") +
+  geom_smooth(method = "lm", se = FALSE)
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+
+
 
 
 ---
@@ -294,12 +317,12 @@ glimpse(titanic)
 ```
 Rows: 891
 Columns: 6
-$ survived &lt;lgl&gt; FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, TR…
-$ pclass   &lt;chr&gt; "Third", "First", "Third", "First", "Third", "Third", "First"…
-$ sex      &lt;fct&gt; sex, sex, sex, sex, sex, sex, sex, sex, sex, sex, sex, sex, s…
-$ age      &lt;dbl&gt; 22, 38, 26, 35, 35, NA, 54, 2, 27, 14, 4, 58, 20, 39, 14, 55,…
-$ fare     &lt;dbl&gt; 7.2500, 71.2833, 7.9250, 53.1000, 8.0500, 8.4583, 51.8625, 21…
-$ embarked &lt;fct&gt; Southampton, Cherbourg, Southampton, Southampton, Southampton…
+$ survived &lt;lgl&gt; FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, TR~
+$ pclass   &lt;chr&gt; "Third", "First", "Third", "First", "Third", "Third", "First"~
+$ sex      &lt;fct&gt; sex, sex, sex, sex, sex, sex, sex, sex, sex, sex, sex, sex, s~
+$ age      &lt;dbl&gt; 22, 38, 26, 35, 35, NA, 54, 2, 27, 14, 4, 58, 20, 39, 14, 55,~
+$ fare     &lt;dbl&gt; 7.2500, 71.2833, 7.9250, 53.1000, 8.0500, 8.4583, 51.8625, 21~
+$ embarked &lt;fct&gt; Southampton, Cherbourg, Southampton, Southampton, Southampton~
 ```
 
 .footnote[The data frame has been cleaned for you.]
@@ -310,25 +333,6 @@ class:inverse middle
 
 .font75[Visualizing a Single Categorical Variable]
 
----
-
-class: middle
-
-.left-panel[
-&lt;br&gt;
-&lt;br&gt;
-If you could speak to R in English, how would you tell R to make this plot for you?
-
-OR
-
-If you had the data and had to draw this bar plot by hand, what would you do?
-
-]
-
-.right-panel[
-
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
-]
 
 ---
 
@@ -359,7 +363,7 @@ ggplot(data = titanic)
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -379,7 +383,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -400,7 +404,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
 ]
 ---
 
@@ -410,7 +414,7 @@ class: middle
 
 .panel[
 .panel-name[Plot]
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -454,7 +458,7 @@ class: middle
 `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -494,7 +498,7 @@ ggplot(data = titanic)
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -514,7 +518,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -540,7 +544,7 @@ ggplot(data = titanic,
 `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -552,7 +556,7 @@ ggplot(data = titanic,
 `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -564,7 +568,7 @@ ggplot(data = titanic,
 * geom_histogram(binwidth = 15)
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -580,19 +584,19 @@ class: middle
 
 ]
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .panel[.panel-name[binwidth = 50]
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .panel[.panel-name[binwidth = 100]
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -629,7 +633,7 @@ ggplot(data = titanic,
 *                color = "white")
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -641,7 +645,7 @@ ggplot(data = titanic,
 *                fill = "darkred")
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -654,7 +658,7 @@ ggplot(data = titanic,
 *                fill = "darkred")
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -679,7 +683,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -699,7 +703,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 .footnote[Note that y-axis is no longer count but we will learn how to change that later.]
@@ -721,7 +725,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 .footnote[Note that y-axis is no longer count but we will change that later.]
@@ -747,14 +751,14 @@ glimpse(penguins)
 ```
 Rows: 344
 Columns: 8
-$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
-$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
-$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
-$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
-$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
-$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
-$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
-$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel~
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse~
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, ~
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, ~
+$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186~
+$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, ~
+$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male~
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007~
 ```
 
 ---
@@ -783,7 +787,7 @@ class: middle
 Warning: Removed 2 rows containing non-finite values (stat_ydensity).
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -824,7 +828,7 @@ class: middle
 Warning: Removed 2 rows containing non-finite values (stat_boxplot).
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-57-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -852,34 +856,8 @@ ggplot(penguins,
 ]
 
 
----
 
-class: middle
 
-.pull-left[
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-57-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
-.pull-right[
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-58-1.png" style="display: block; margin: auto;" /&gt;
-]
-
-.footnote[Note: Violin plots display densities, not counts!]
----
-
-class: middle
-
-.pull-left[
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-59-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
-.pull-right[
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-60-1.png" style="display: block; margin: auto;" /&gt;
-]
-
-.footnote[Note: Violin plots display densities, not counts!]
 ---
 class: inverse middle
 
@@ -904,7 +882,7 @@ ggplot(penguins,
 Warning: Removed 2 rows containing missing values (geom_point).
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-62-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-60-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 

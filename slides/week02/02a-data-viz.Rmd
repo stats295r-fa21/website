@@ -59,9 +59,7 @@ class: middle
 
 ## Review
 
-Quiz questions  
-Homework  
-Lecture on Descriptive Statistics 
+
 
 ---
 
@@ -269,26 +267,18 @@ data %>%
 
 ]
 
----
 
-class: middle
-
-## In pairs
-
-Discuss:
-
-- In right-skewed distributions mean > median, true or false?
-- In left-skewed distributions mean > median, true or false?
 
 ---
+
 
 class: middle
 
 .pull-left[
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
-ggplot(babies,
-       aes(x = smoke,
-           y = bwt))  +
+ggplot(penguins,
+       aes(x = species,
+           y = bill_length_mm))  +
   geom_violin() +
   theme(text = element_text(size=20))
 
@@ -297,19 +287,47 @@ ggplot(babies,
 ]
 
 .pull-right[
-
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
-ggplot(babies,
-       aes(x = bwt))  +
+ggplot(penguins,
+       aes(x = bill_length_mm))  +
   geom_histogram() +
-  facet_wrap(~smoke) +
+  facet_wrap(~species) +
   coord_flip() +
+  theme(text = element_text(size=20))
+
+```
+]
+
+.footnote[Note: Violin plots display densities, not counts!]
+---
+
+class: middle
+
+.pull-left[
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+ggplot(penguins,
+       aes(x = species,
+           y = bill_length_mm))  +
+  geom_violin() +
   theme(text = element_text(size=20))
 
 ```
 
 ]
 
+.pull-right[
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+ggplot(penguins,
+       aes(x = bill_length_mm))  +
+  geom_density() +
+  facet_wrap(~species) +
+  coord_flip() +
+  theme(text = element_text(size=20))
+
+```
+]
+
+.footnote[Note: Violin plots display densities, not counts!]
 ---
 
 class: inverse middle center
@@ -394,6 +412,21 @@ Birth weight is the response variable and is shown on the y-axis.
 
 ## Linear Relationship
 
+.pull-left[
+
+```{r eval = FALSE, fig.height=4, fig.align='center', warning=FALSE, message=FALSE}
+ggplot(babies,
+       aes(x = gestation,
+           y = bwt))  +
+  geom_point() +
+  labs(x = "Gestation (days)",
+       y = "Birth weight (ounces)") +
+  geom_smooth(method = "lm", se = FALSE)
+```
+]
+
+.pull-right[
+
 ```{r echo = FALSE, fig.height=4, fig.align='center', warning=FALSE, message=FALSE}
 ggplot(babies,
        aes(x = gestation,
@@ -403,9 +436,11 @@ ggplot(babies,
        y = "Birth weight (ounces)") +
   geom_smooth(method = "lm", se = FALSE)
 ```
+]
 
-Later on we will start statistical modeling during which we will numerically define the relationship between gestation and birth weight. 
-For now we can say that this relationship looks positive and moderate.
+
+
+
 
 
 ---
@@ -434,28 +469,6 @@ class:inverse middle
 
 .font75[Visualizing a Single Categorical Variable]
 
----
-
-class: middle
-
-.left-panel[
-<br>
-<br>
-If you could speak to R in English, how would you tell R to make this plot for you?
-
-OR
-
-If you had the data and had to draw this bar plot by hand, what would you do?
-
-]
-
-.right-panel[
-
-```{r echo=FALSE}
-ggplot(titanic, aes(x = pclass)) +
-  geom_bar()
-```
-]
 
 ---
 
@@ -984,64 +997,8 @@ ggplot(penguins,
 ]
 
 
----
 
-class: middle
 
-.pull-left[
-```{r echo = FALSE, message = FALSE, warning = FALSE}
-ggplot(penguins,
-       aes(x = species,
-           y = bill_length_mm))  +
-  geom_violin() +
-  theme(text = element_text(size=20))
-
-```
-
-]
-
-.pull-right[
-```{r echo = FALSE, message = FALSE, warning = FALSE}
-ggplot(penguins,
-       aes(x = bill_length_mm))  +
-  geom_histogram() +
-  facet_wrap(~species) +
-  coord_flip() +
-  theme(text = element_text(size=20))
-
-```
-]
-
-.footnote[Note: Violin plots display densities, not counts!]
----
-
-class: middle
-
-.pull-left[
-```{r echo = FALSE, message = FALSE, warning = FALSE}
-ggplot(penguins,
-       aes(x = species,
-           y = bill_length_mm))  +
-  geom_violin() +
-  theme(text = element_text(size=20))
-
-```
-
-]
-
-.pull-right[
-```{r echo = FALSE, message = FALSE, warning = FALSE}
-ggplot(penguins,
-       aes(x = bill_length_mm))  +
-  geom_density() +
-  facet_wrap(~species) +
-  coord_flip() +
-  theme(text = element_text(size=20))
-
-```
-]
-
-.footnote[Note: Violin plots display densities, not counts!]
 ---
 class: inverse middle
 
