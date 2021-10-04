@@ -269,33 +269,6 @@ Length of gestation can **possibly** eXplain a baby's birth weight.
 Gestation is the eXplanatory variable and is shown on the x-axis.
 Birth weight is the response variable and is shown on the y-axis.
 
----
-
-## Linear Relationship
-
-.pull-left[
-
-
-```r
-ggplot(babies,
-       aes(x = gestation,
-           y = bwt))  +
-  geom_point() +
-  labs(x = "Gestation (days)",
-       y = "Birth weight (ounces)") +
-  geom_smooth(method = "lm", se = FALSE)
-```
-]
-
-.pull-right[
-
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
-]
-
-
-
-
-
 
 ---
 
@@ -363,7 +336,7 @@ ggplot(data = titanic)
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -383,7 +356,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -404,7 +377,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
 ]
 ---
 
@@ -414,7 +387,7 @@ class: middle
 
 .panel[
 .panel-name[Plot]
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -458,7 +431,7 @@ class: middle
 `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -498,7 +471,7 @@ ggplot(data = titanic)
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -518,7 +491,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -544,7 +517,7 @@ ggplot(data = titanic,
 `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -556,7 +529,7 @@ ggplot(data = titanic,
 `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -568,7 +541,7 @@ ggplot(data = titanic,
 * geom_histogram(binwidth = 15)
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -584,19 +557,19 @@ class: middle
 
 ]
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .panel[.panel-name[binwidth = 50]
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .panel[.panel-name[binwidth = 100]
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -633,7 +606,7 @@ ggplot(data = titanic,
 *                color = "white")
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -645,7 +618,7 @@ ggplot(data = titanic,
 *                fill = "darkred")
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -658,7 +631,7 @@ ggplot(data = titanic,
 *                fill = "darkred")
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -683,7 +656,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -703,7 +676,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 .footnote[Note that y-axis is no longer count but we will learn how to change that later.]
@@ -725,7 +698,7 @@ ggplot(data = titanic,
 
 .pull-right[
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 .footnote[Note that y-axis is no longer count but we will change that later.]
@@ -787,7 +760,7 @@ class: middle
 Warning: Removed 2 rows containing non-finite values (stat_ydensity).
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -828,7 +801,7 @@ class: middle
 Warning: Removed 2 rows containing non-finite values (stat_boxplot).
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-57-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -882,10 +855,160 @@ ggplot(penguins,
 Warning: Removed 2 rows containing missing values (geom_point).
 ```
 
-&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-60-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-58-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
+---
+
+## Linear Relationship
+
+.pull-left[
+
+
+```r
+ggplot(babies,
+       aes(x = gestation,
+           y = bwt))  +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+]
+
+.pull-right[
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-60-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: middle inverse
+
+.font75[Considering More Than Two Variables]
+
+---
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           color = species)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+
+```
+Warning: Removed 2 rows containing missing values (geom_point).
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-62-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+
+```
+Warning: Removed 2 rows containing missing values (geom_point).
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-64-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+
+```
+Warning: Removed 2 rows containing missing values (geom_point).
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-66-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+
+```
+Warning: Removed 2 rows containing missing values (geom_point).
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-68-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+.left-panel[
+
+```r
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species,
+           size = body_mass_g)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+
+```
+Warning: Removed 2 rows containing missing values (geom_point).
+```
+
+&lt;img src="02a-data-viz_files/figure-html/unnamed-chunk-70-1.png" style="display: block; margin: auto;" /&gt;
+]
 ---
 
 &lt;img src="img/ggplot-summary.jpeg" width="95%" style="display: block; margin: auto;" /&gt;

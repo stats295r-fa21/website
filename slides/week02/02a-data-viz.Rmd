@@ -408,40 +408,6 @@ Length of gestation can **possibly** eXplain a baby's birth weight.
 Gestation is the eXplanatory variable and is shown on the x-axis.
 Birth weight is the response variable and is shown on the y-axis.
 
----
-
-## Linear Relationship
-
-.pull-left[
-
-```{r eval = FALSE, fig.height=4, fig.align='center', warning=FALSE, message=FALSE}
-ggplot(babies,
-       aes(x = gestation,
-           y = bwt))  +
-  geom_point() +
-  labs(x = "Gestation (days)",
-       y = "Birth weight (ounces)") +
-  geom_smooth(method = "lm", se = FALSE)
-```
-]
-
-.pull-right[
-
-```{r echo = FALSE, fig.height=4, fig.align='center', warning=FALSE, message=FALSE}
-ggplot(babies,
-       aes(x = gestation,
-           y = bwt))  +
-  geom_point() +
-  labs(x = "Gestation (days)",
-       y = "Birth weight (ounces)") +
-  geom_smooth(method = "lm", se = FALSE)
-```
-]
-
-
-
-
-
 
 ---
 
@@ -1026,6 +992,164 @@ ggplot(penguins,
 
 ]
 
+---
+
+## Linear Relationship
+
+.pull-left[
+
+```{r eval = FALSE, fig.height=4, fig.align='center', warning=FALSE, message=FALSE}
+ggplot(babies,
+       aes(x = gestation,
+           y = bwt))  +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+]
+
+.pull-right[
+
+```{r echo = FALSE, fig.height=4, fig.align='center', warning=FALSE, message=FALSE}
+ggplot(babies,
+       aes(x = gestation,
+           y = bwt))  +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+]
+
+---
+class: middle inverse
+
+.font75[Considering More Than Two Variables]
+
+---
+
+.left-panel[
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           color = species)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           color= species))  +
+  geom_point()
+```
+
+]
+
+
+---
+.left-panel[
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species))  +
+  geom_point()
+```
+
+]
+
+---
+
+
+
+.left-panel[
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species))  +
+  geom_point()
+```
+
+]
+
+---
+
+.left-panel[
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species))  +
+  geom_point()
+```
+
+]
+
+
+---
+
+.left-panel[
+```{r eval = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species,
+           size = body_mass_g)) +
+  geom_point()
+```
+
+]
+
+.right-panel[
+```{r echo = FALSE}
+ggplot(penguins,
+       aes(x = bill_depth_mm,
+           y = bill_length_mm,
+           shape = species,
+           color = species,
+           size = body_mass_g))  +
+  geom_point()
+```
+]
 ---
 
 ```{r echo = FALSE, out.width ="95%"}
