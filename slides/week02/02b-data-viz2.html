@@ -4,7 +4,7 @@
     <title>Visaluzing Data:  Part II</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Mine Dogucu" />
-    <script src="02b-data-viz2_files/header-attrs-2.11/header-attrs.js"></script>
+    <script src="02b-data-viz2_files/header-attrs-2.9/header-attrs.js"></script>
     <link href="02b-data-viz2_files/panelset-0.2.6/panelset.css" rel="stylesheet" />
     <script src="02b-data-viz2_files/panelset-0.2.6/panelset.js"></script>
     <link rel="stylesheet" href="slide-style.css" type="text/css" />
@@ -361,6 +361,13 @@ class: middle
 
 ```r
 library(maps)
+```
+
+```
+Warning: package 'maps' was built under R version 4.1.1
+```
+
+```r
 usa &lt;- map_data("usa")
 glimpse(usa)
 ```
@@ -368,12 +375,12 @@ glimpse(usa)
 ```
 Rows: 7,243
 Columns: 6
-$ long      &lt;dbl&gt; -101.4078, -101.3906, -101.…
-$ lat       &lt;dbl&gt; 29.74224, 29.74224, 29.6505…
-$ group     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, …
-$ order     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, …
-$ region    &lt;chr&gt; "main", "main", "main", "ma…
-$ subregion &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ long      &lt;dbl&gt; -101.4078, -101.3906, -101.3620, -101.3505, -101.3219, -101.~
+$ lat       &lt;dbl&gt; 29.74224, 29.74224, 29.65056, 29.63911, 29.63338, 29.64484, ~
+$ group     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ~
+$ order     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1~
+$ region    &lt;chr&gt; "main", "main", "main", "main", "main", "main", "main", "mai~
+$ subregion &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
 ```
 
 ---
@@ -512,7 +519,7 @@ home
 ```
 
 ```
-# A tibble: 4 × 4
+# A tibble: 4 x 4
   location      lat   long    pop
   &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 1 Northampton  42.3  -72.6  28726
@@ -681,12 +688,10 @@ palette.colors(palette = "Okabe-Ito")
 ```
 
 ```
-        black        orange       skyblue 
-    "#000000"     "#E69F00"     "#56B4E9" 
-  bluishgreen        yellow          blue 
-    "#009E73"     "#F0E442"     "#0072B2" 
-   vermillion reddishpurple          gray 
-    "#D55E00"     "#CC79A7"     "#999999" 
+        black        orange       skyblue   bluishgreen        yellow 
+    "#000000"     "#E69F00"     "#56B4E9"     "#009E73"     "#F0E442" 
+         blue    vermillion reddishpurple          gray 
+    "#0072B2"     "#D55E00"     "#CC79A7"     "#999999" 
 ```
 
 [Okabe-Ito color palette](https://jfly.uni-koeln.de/color/) allows us to make figures that are colorblind friendly.
@@ -766,14 +771,14 @@ class: center middle
 
 &lt;tr&gt;
 
-&lt;td&gt;cap = "Some figure caption"&lt;/td&gt;
+&lt;td&gt;fig.cap = "Some figure caption"&lt;/td&gt;
 &lt;td&gt;creates a figure caption&lt;/td&gt;
 
 &lt;/tr&gt;
 
 &lt;tr&gt;
 
-&lt;td&gt;alt = "Some alternate text for figure"&lt;/td&gt;
+&lt;td&gt;fig.alt = "Some alternate text for figure"&lt;/td&gt;
 &lt;td&gt;creates alternate text for figures&lt;/td&gt;
 
 &lt;/tr&gt;

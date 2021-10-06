@@ -943,14 +943,14 @@ class: center middle
 
 <tr>
 
-<td>cap = "Some figure caption"</td>
+<td>fig.cap = "Some figure caption"</td>
 <td>creates a figure caption</td>
 
 </tr>
 
 <tr>
 
-<td>alt = "Some alternate text for figure"</td>
+<td>fig.alt = "Some alternate text for figure"</td>
 <td>creates alternate text for figures</td>
 
 </tr>
