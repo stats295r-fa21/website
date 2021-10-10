@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Wrangling:  Part II</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="03b-data-wrangle2_files/header-attrs-2.11/header-attrs.js"></script>
+    <link href="03b-data-wrangle2_files/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="03b-data-wrangle2_files/panelset-0.2.6/panelset.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+
+
+
+
+
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# Data Wrangling: &lt;br&gt;Part II
+## Dr. Mine Dogucu
+]
+
+---
+
+class: middle
+
+## Review
+
+Quiz  
+
+
+---
+
+class: middle
+
+## Goals 
+
+- Review aggregating data
+- Aggregating group data
+- Data joins
+- Lots of data wrangling practice
+
+---
+class: middle
+
+
+
+
+.pull-left[
+## Data
+Observations
+]
+
+.pull-left[
+## Aggregate Data
+Summaries of observations
+]
+
+---
+class: inverse middle
+
+.font75[Aggregating Categorical Data]
+
+---
+
+class: middle
+
+Categorical data are summarized with **counts** or **proportions**
+
+---
+
+class: middle
+
+
+```r
+lapd %&gt;% 
+  count(employment_type)
+```
+
+```
+# A tibble: 3 × 2
+  employment_type     n
+  &lt;fct&gt;           &lt;int&gt;
+1 Full Time       14664
+2 Part Time         132
+3 Per Event          28
+```
+
+
+---
+
+class: middle
+
+
+```r
+lapd %&gt;% 
+  count(employment_type) %&gt;% 
+  mutate(prop = n/sum(n))
+```
+
+```
+# A tibble: 3 × 3
+  employment_type     n    prop
+  &lt;fct&gt;           &lt;int&gt;   &lt;dbl&gt;
+1 Full Time       14664 0.989  
+2 Part Time         132 0.00890
+3 Per Event          28 0.00189
+```
+
+
+
+
+---
+
+class: middle
+
+## Mean
+
+
+
+```r
+summarize(lapd, 
+          mean_base_pay = mean(base_pay))
+```
+
+```
+# A tibble: 1 × 1
+  mean_base_pay
+          &lt;dbl&gt;
+1        85149.
+```
+
+
+---
+
+class: middle
+
+Recall that we use multiple functions such as `mean()` and `median` within the summarize function
+
+
+```r
+summarize(lapd,
+          mean_base_pay = mean(base_pay),
+          med_base_pay = median(base_pay))
+```
+
+```
+# A tibble: 1 × 2
+  mean_base_pay med_base_pay
+          &lt;dbl&gt;        &lt;dbl&gt;
+1        85149.       97601.
+```
+
+---
+
+class: inverse middle
+
+.font75[Aggregating Data by Groups]
+
+---
+
+class: middle
+
+`group_by()`
+
+&lt;img src="img/data-wrangle.003.jpeg" width="80%" style="display: block; margin: auto;" /&gt;
+
+`group_by()` separates the data frame by the groups. Any action following `group_by()` will be completed for each group separately.
+---
+
+class: middle
+
+Q. What is the median salary for each employment type?
+
+---
+
+
+```r
+lapd %&gt;% 
+  group_by(employment_type)
+```
+
+```
+# A tibble: 14,824 × 4
+# Groups:   employment_type [3]
+  job_class_title                  employment_type base_pay base_pay_level     
+  &lt;fct&gt;                            &lt;fct&gt;              &lt;dbl&gt; &lt;chr&gt;              
+1 Police Detective II              Full Time        119322. Greater than Median
+2 Police Sergeant I                Full Time        113271. Greater than Median
+3 Police Lieutenant II             Full Time        148116  Greater than Median
+4 Police Service Representative II Full Time         78677. Greater than Median
+5 Police Officer III               Full Time        109374. Greater than Median
+6 Police Officer II                Full Time         95002. Greater than Median
+# … with 14,818 more rows
+```
+
+---
+
+
+```r
+lapd %&gt;% 
+  group_by(employment_type) %&gt;% 
+  summarize(med_base_pay = median(base_pay))
+```
+
+```
+# A tibble: 3 × 2
+  employment_type med_base_pay
+  &lt;fct&gt;                  &lt;dbl&gt;
+1 Full Time             97996.
+2 Part Time             14474.
+3 Per Event              4275 
+```
+
+---
+
+class: middle
+
+We can also remind ourselves how many staff members there were in each group.
+
+
+```r
+lapd %&gt;% 
+  group_by(employment_type) %&gt;% 
+  summarize(med_base_pay = median(base_pay),
+            count = n())
+```
+
+```
+# A tibble: 3 × 3
+  employment_type med_base_pay count
+  &lt;fct&gt;                  &lt;dbl&gt; &lt;int&gt;
+1 Full Time             97996. 14664
+2 Part Time             14474.   132
+3 Per Event              4275     28
+```
+
+Note that `n()` does not take any arguments.
+
+---
+class: middle
+
+&lt;img src="img/data_joins.png" width="340" style="display: block; margin: auto;" /&gt;
+
+.font15[Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)] 
+
+---
+
+class: middle
+
+## Inner Join
+
+&lt;img src="img/inner_join.png" width="1056" style="display: block; margin: auto;" /&gt;
+
+.font15[Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)] 
+
+---
+
+
+class: middle
+
+#### Outer Joins
+
+&lt;img src="img/outer_joins.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+.font15[Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)] 
+
+---
+
+class: middle
+
+## Data Joins
+
+&lt;img src="img/join_venn.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+.font15[Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)] 
+
+---
+
+.panelset[
+.panel[
+.panel-name[artists]
+
+
+```r
+artists
+```
+
+```
+# A tibble: 4 × 2
+  name          followers
+  &lt;chr&gt;             &lt;dbl&gt;
+1 Beyoncé        24757958
+2 Taylor Swift   33098116
+3 Ariana Grande  51807131
+4 Drake          50252529
+```
+
+
+]
+
+.panel[
+.panel-name[songs]
+
+
+```r
+songs
+```
+
+```
+# A tibble: 5 × 4
+  name          song_name                            album_name  song_popularity
+  &lt;chr&gt;         &lt;chr&gt;                                &lt;chr&gt;                 &lt;dbl&gt;
+1 Beyoncé       Savage Remix (feat. Beyoncé)         Savage Rem…              83
+2 Taylor Swift  cardigan                             folklore                 85
+3 Drake         Laugh Now Cry Later (feat. Lil Durk) Laugh Now …              95
+4 Beyoncé       Halo                                 I AM…SASHA…              NA
+5 Ariana Grande Stuck with U (with Justin Bieber)    Stuck with…              NA
+```
+
+
+]
+
+.panel[
+.panel-name[albums]
+
+
+```r
+albums
+```
+
+```
+# A tibble: 4 × 2
+  album_name                           album_release_date
+  &lt;chr&gt;                                &lt;date&gt;            
+1 Savage Remix (feat. Beyoncé)         2020-04-29        
+2 I AM…SASHA FIERCE                    2008-11-14        
+3 Stuck with U                         2020-05-08        
+4 Laugh Now Cry Later (feat. Lil Durk) 2020-08-14        
+```
+
+]
+]
+
+---
+
+class: middle
+
+&lt;img src="img/data_joins_spotify.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+## Join Functions
+
+`something_join(x, y)` All the join functions in dplyr package are in this fashion where x represents the first data frame and y represents the second data frame.
+
+
+
+---
+
+.panelset[
+.panel[
+
+.panel-name[x]
+
+
+```r
+songs
+```
+
+```
+# A tibble: 5 × 4
+  name          song_name                            album_name  song_popularity
+  &lt;chr&gt;         &lt;chr&gt;                                &lt;chr&gt;                 &lt;dbl&gt;
+1 Beyoncé       Savage Remix (feat. Beyoncé)         Savage Rem…              83
+2 Taylor Swift  cardigan                             folklore                 85
+3 Drake         Laugh Now Cry Later (feat. Lil Durk) Laugh Now …              95
+4 Beyoncé       Halo                                 I AM…SASHA…              NA
+5 Ariana Grande Stuck with U (with Justin Bieber)    Stuck with…              NA
+```
+
+
+]
+
+.panel[
+
+.panel-name[y]
+
+
+```r
+albums
+```
+
+```
+# A tibble: 4 × 2
+  album_name                           album_release_date
+  &lt;chr&gt;                                &lt;date&gt;            
+1 Savage Remix (feat. Beyoncé)         2020-04-29        
+2 I AM…SASHA FIERCE                    2008-11-14        
+3 Stuck with U                         2020-05-08        
+4 Laugh Now Cry Later (feat. Lil Durk) 2020-08-14        
+```
+
+
+]
+
+.panel[
+
+.panel-name[left_join()]
+
+
+```r
+left_join(songs, albums, by = "album_name")
+```
+
+```
+# A tibble: 5 × 5
+  name          song_name       album_name      song_popularity album_release_d…
+  &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;                     &lt;dbl&gt; &lt;date&gt;          
+1 Beyoncé       Savage Remix (… Savage Remix (…              83 2020-04-29      
+2 Taylor Swift  cardigan        folklore                     85 NA              
+3 Drake         Laugh Now Cry … Laugh Now Cry …              95 2020-08-14      
+4 Beyoncé       Halo            I AM…SASHA FIE…              NA 2008-11-14      
+5 Ariana Grande Stuck with U (… Stuck with U                 NA 2020-05-08      
+```
+
+]
+
+]
+
+`left_join()` includes all rows from x
+
+
+
+---
+
+.panelset[
+.panel[
+
+.panel-name[x]
+
+
+```r
+songs
+```
+
+```
+# A tibble: 5 × 4
+  name          song_name                            album_name  song_popularity
+  &lt;chr&gt;         &lt;chr&gt;                                &lt;chr&gt;                 &lt;dbl&gt;
+1 Beyoncé       Savage Remix (feat. Beyoncé)         Savage Rem…              83
+2 Taylor Swift  cardigan                             folklore                 85
+3 Drake         Laugh Now Cry Later (feat. Lil Durk) Laugh Now …              95
+4 Beyoncé       Halo                                 I AM…SASHA…              NA
+5 Ariana Grande Stuck with U (with Justin Bieber)    Stuck with…              NA
+```
+
+
+]
+
+.panel[
+
+.panel-name[y]
+
+
+```r
+albums
+```
+
+```
+# A tibble: 4 × 2
+  album_name                           album_release_date
+  &lt;chr&gt;                                &lt;date&gt;            
+1 Savage Remix (feat. Beyoncé)         2020-04-29        
+2 I AM…SASHA FIERCE                    2008-11-14        
+3 Stuck with U                         2020-05-08        
+4 Laugh Now Cry Later (feat. Lil Durk) 2020-08-14        
+```
+
+
+]
+
+.panel[
+
+.panel-name[right_join()]
+
+
+```r
+right_join(songs, albums, by = "album_name")
+```
+
+```
+# A tibble: 4 × 5
+  name          song_name       album_name      song_popularity album_release_d…
+  &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;                     &lt;dbl&gt; &lt;date&gt;          
+1 Beyoncé       Savage Remix (… Savage Remix (…              83 2020-04-29      
+2 Drake         Laugh Now Cry … Laugh Now Cry …              95 2020-08-14      
+3 Beyoncé       Halo            I AM…SASHA FIE…              NA 2008-11-14      
+4 Ariana Grande Stuck with U (… Stuck with U                 NA 2020-05-08      
+```
+
+]
+
+]
+
+`right_join()` includes all rows from `y`
+
+---
+
+.panelset[
+.panel[
+
+.panel-name[x]
+
+
+```r
+songs
+```
+
+```
+# A tibble: 5 × 4
+  name          song_name                            album_name  song_popularity
+  &lt;chr&gt;         &lt;chr&gt;                                &lt;chr&gt;                 &lt;dbl&gt;
+1 Beyoncé       Savage Remix (feat. Beyoncé)         Savage Rem…              83
+2 Taylor Swift  cardigan                             folklore                 85
+3 Drake         Laugh Now Cry Later (feat. Lil Durk) Laugh Now …              95
+4 Beyoncé       Halo                                 I AM…SASHA…              NA
+5 Ariana Grande Stuck with U (with Justin Bieber)    Stuck with…              NA
+```
+
+
+]
+
+.panel[
+
+.panel-name[y]
+
+
+```r
+albums
+```
+
+```
+# A tibble: 4 × 2
+  album_name                           album_release_date
+  &lt;chr&gt;                                &lt;date&gt;            
+1 Savage Remix (feat. Beyoncé)         2020-04-29        
+2 I AM…SASHA FIERCE                    2008-11-14        
+3 Stuck with U                         2020-05-08        
+4 Laugh Now Cry Later (feat. Lil Durk) 2020-08-14        
+```
+
+
+]
+
+.panel[
+
+.panel-name[inner_join()]
+
+
+```r
+inner_join(songs, albums, by = "album_name")
+```
+
+```
+# A tibble: 4 × 5
+  name          song_name       album_name      song_popularity album_release_d…
+  &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;                     &lt;dbl&gt; &lt;date&gt;          
+1 Beyoncé       Savage Remix (… Savage Remix (…              83 2020-04-29      
+2 Drake         Laugh Now Cry … Laugh Now Cry …              95 2020-08-14      
+3 Beyoncé       Halo            I AM…SASHA FIE…              NA 2008-11-14      
+4 Ariana Grande Stuck with U (… Stuck with U                 NA 2020-05-08      
+```
+
+]
+
+]
+
+`inner_join()` includes all rows that are in x **and** y
+
+---
+
+.panelset[
+.panel[
+
+.panel-name[x]
+
+
+```r
+songs
+```
+
+```
+# A tibble: 5 × 4
+  name          song_name                            album_name  song_popularity
+  &lt;chr&gt;         &lt;chr&gt;                                &lt;chr&gt;                 &lt;dbl&gt;
+1 Beyoncé       Savage Remix (feat. Beyoncé)         Savage Rem…              83
+2 Taylor Swift  cardigan                             folklore                 85
+3 Drake         Laugh Now Cry Later (feat. Lil Durk) Laugh Now …              95
+4 Beyoncé       Halo                                 I AM…SASHA…              NA
+5 Ariana Grande Stuck with U (with Justin Bieber)    Stuck with…              NA
+```
+
+
+]
+
+.panel[
+
+.panel-name[y]
+
+
+```r
+albums
+```
+
+```
+# A tibble: 4 × 2
+  album_name                           album_release_date
+  &lt;chr&gt;                                &lt;date&gt;            
+1 Savage Remix (feat. Beyoncé)         2020-04-29        
+2 I AM…SASHA FIERCE                    2008-11-14        
+3 Stuck with U                         2020-05-08        
+4 Laugh Now Cry Later (feat. Lil Durk) 2020-08-14        
+```
+
+
+]
+
+.panel[
+
+.panel-name[full_join()]
+
+
+```r
+full_join(songs, albums, by = "album_name")
+```
+
+```
+# A tibble: 5 × 5
+  name          song_name       album_name      song_popularity album_release_d…
+  &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;                     &lt;dbl&gt; &lt;date&gt;          
+1 Beyoncé       Savage Remix (… Savage Remix (…              83 2020-04-29      
+2 Taylor Swift  cardigan        folklore                     85 NA              
+3 Drake         Laugh Now Cry … Laugh Now Cry …              95 2020-08-14      
+4 Beyoncé       Halo            I AM…SASHA FIE…              NA 2008-11-14      
+5 Ariana Grande Stuck with U (… Stuck with U                 NA 2020-05-08      
+```
+
+]
+
+]
+
+`full_join()` includes all rows that are in x **or** y
+
+---
+
+
+.panelset[
+.panel[
+.panel-name[artists]
+
+
+```r
+artists
+```
+
+```
+# A tibble: 4 × 2
+  name          followers
+  &lt;chr&gt;             &lt;dbl&gt;
+1 Beyoncé        24757958
+2 Taylor Swift   33098116
+3 Ariana Grande  51807131
+4 Drake          50252529
+```
+
+
+]
+
+.panel[
+.panel-name[songs]
+
+
+```r
+songs
+```
+
+```
+# A tibble: 5 × 4
+  name          song_name                            album_name  song_popularity
+  &lt;chr&gt;         &lt;chr&gt;                                &lt;chr&gt;                 &lt;dbl&gt;
+1 Beyoncé       Savage Remix (feat. Beyoncé)         Savage Rem…              83
+2 Taylor Swift  cardigan                             folklore                 85
+3 Drake         Laugh Now Cry Later (feat. Lil Durk) Laugh Now …              95
+4 Beyoncé       Halo                                 I AM…SASHA…              NA
+5 Ariana Grande Stuck with U (with Justin Bieber)    Stuck with…              NA
+```
+
+
+]
+
+.panel[
+.panel-name[albums]
+
+
+```r
+albums
+```
+
+```
+# A tibble: 4 × 2
+  album_name                           album_release_date
+  &lt;chr&gt;                                &lt;date&gt;            
+1 Savage Remix (feat. Beyoncé)         2020-04-29        
+2 I AM…SASHA FIERCE                    2008-11-14        
+3 Stuck with U                         2020-05-08        
+4 Laugh Now Cry Later (feat. Lil Durk) 2020-08-14        
+```
+
+]
+
+.panel[
+.panel-name[combined]
+
+
+```r
+full_join(artists, songs, by = "name") %&gt;% 
+  full_join(albums, by = "album_name")
+```
+
+```
+# A tibble: 5 × 6
+  name          followers song_name  album_name song_popularity album_release_d…
+  &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                &lt;dbl&gt; &lt;date&gt;          
+1 Beyoncé        24757958 Savage Re… Savage Re…              83 2020-04-29      
+2 Beyoncé        24757958 Halo       I AM…SASH…              NA 2008-11-14      
+3 Taylor Swift   33098116 cardigan   folklore                85 NA              
+4 Ariana Grande  51807131 Stuck wit… Stuck wit…              NA 2020-05-08      
+5 Drake          50252529 Laugh Now… Laugh Now…              95 2020-08-14      
+```
+
+
+]
+
+
+]
+
+---
+class: middle
+
+Complete the questions provided to you in the lecture notes.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
