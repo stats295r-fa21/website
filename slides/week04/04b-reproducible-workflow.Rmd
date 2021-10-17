@@ -1,5 +1,5 @@
 ---
-title: "Good workflow practices"
+title: "Workflow practices for reproducible analysis"
 author: "Dr. Mine Dogucu"
 output: 
   xaringan::moon_reader:
