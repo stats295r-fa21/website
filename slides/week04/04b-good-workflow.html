@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Good workflow practices</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="04b-good-workflow_files/header-attrs-2.11/header-attrs.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+
+
+
+
+
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# Good workflow practices
+## Dr. Mine Dogucu
+]
+
+---
+
+class: middle
+
+## Review
+
+Quiz  
+
+---
+
+class: middle
+
+## Goals
+
+- Naming files
+- README.md
+- gitignore
+- Importing data
+- Collaborating on GitHub
+
+---
+
+class: center middle inverse
+
+.font50[Naming files]
+
+---
+
+class: middle
+
+Three principles of naming files 
+
+- machine readable
+- human readable
+- plays well with default ordering (e.g. alphabetical and numerical ordering)
+
+(Jenny Bryan)
+
+for the purposes of this class an additional principle is that file names follow
+
+- tidyverse style (all lower case letters, words separated by HYPHEN)
+
+---
+
+class: center middle inverse
+
+.font50[README.md]
+
+---
+
+class: middle
+
+- README file is the first file users read. In our case a user might be our future self, a teammate, or (if open source) anyone.
+
+--
+
+- There can be multiple README files within a single directory: e.g. for the general project folder and then for a data subfolder. Data folder README's can possibly contain codebook (data dictionary).
+
+--
+
+- It should be brief but detailed enough to help user navigate. 
+
+--
+
+- a README should be up-to-date (e.g. from proposal to presentation stage of final projects they need to be updated).
+
+--
+
+- On GitHub we use markdown for README file (`README.md`). Good news: [emojis are supported.](https://gist.github.com/rxaviers/7360908)
+
+---
+
+class: middle
+
+## README examples
+
+- [ICS 80 website](https://github.com/ics80-fa21/website)
+- [Museum of Modern Art Collection](https://github.com/MuseumofModernArt/collection)
+- [R package bayesrules](https://github.com/bayes-rules/bayesrules)
+
+---
+
+## .gitignore
+
+A `.gitignore` file contains the list of files which Git has been explicitly told to ignore. 
+
+--
+
+For instance `README.html` can be git ignored.
+
+--
+
+You may consider git ignoring confidential files (e.g. some datasets) so that they would not be pushed by mistake to GitHub. 
+
+--
+
+A file can be git ignored either by point-and-click using RStudio's Git pane or by adding the file path to the `.gitignore` file. For instance `weather.csv` data file in a `data` folder need to be added as `data/weather.csv`
+
+--
+
+Files with certain files (e.g. all `.log` files) can also be ignored. See [git ignore patterns](https://www.atlassian.com/git/tutorials/saving-changes/gitignore).
+
+---
+class: center middle inverse
+
+.font50[Importing data]
+
+---
+
+class: middle
+
+## Importing .csv Data 
+
+
+
+```r
+readr::read_csv("dataset.csv")
+```
+
+---
+
+class: middle
+
+## Importing Excel Data
+
+
+```r
+readxl::read_excel("dataset.xlsx")
+```
+
+ 
+
+---
+
+class: middle
+
+
+## Importing Excel Data
+
+
+```r
+readxl::read_excel("dataset.xlsx", sheet = 2)
+```
+
+---
+
+class: middle
+
+## Importing SAS, SPSS, Stata Data
+
+
+```r
+library(haven)
+# SAS
+read_sas("dataset.sas7bdat")
+# SPSS
+read_sav("dataset.sav")
+# Stata
+read_dta("dataset.dta")
+```
+
+
+---
+
+## Where is the dataset file?
+
+Importing data will depend on where the dataset is on your computer. However we use the help of `here::here()` function. 
+This function sets the working directory to the project folder (i.e. where the `.Rproj` file is).
+
+
+```r
+read_csv(here::here("data/dataset.csv"))
+```
+
+
+---
+
+class: center middle inverse
+
+.font50[Collaborating on GitHub]
+
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.002.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.003.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.004.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.005.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.006.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.007.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.008.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+If each change is made by one collaborator at a time, this would not be an efficient workflow. 
+
+---
+
+---
+
+class: middle center
+
+
+&lt;img src="img/git-collab.009.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.010.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.011.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+class: middle 
+
+
+1 - commit
+
+2 - pull (very important)
+
+3 - push
+
+
+---
+
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.013.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.014.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+---
+
+
+class: middle center
+
+
+&lt;img src="img/git-collab.015.jpeg" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Opening an issue
+
+&lt;img src="img/create-issue.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+We can create an **issue** to keep a list of mistakes to be fixed, ideas to check with teammates, or note a to-do task. You can assign tasks to yourself or teammates. 
+
+---
+
+## Closing an issue
+
+&lt;img src="img/issue-number.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+If you are working on an issue, it makes sense to refer to issue number in your commit message (e.g. "add first draft of alternate texts for #4"). 
+If your commit resolves the issue then you can use key words such as "fixes #4" or "closes #4" to close the issue. 
+Issues can also be manually closed.
+
+---
+
+It is also a good practice to save session information as package versions change, in order to be able to reproduce results from an analysis we need to know under what technical conditions the analysis was conducted.
+
+
+```r
+sessionInfo()
+```
+
+```
+R version 4.1.0 (2021-05-18)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] forcats_0.5.1   stringr_1.4.0   dplyr_1.0.7     purrr_0.3.4    
+[5] readr_2.0.2     tidyr_1.1.4     tibble_3.1.5    ggplot2_3.3.5  
+[9] tidyverse_1.3.1
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.1.1 xfun_0.26        bslib_0.3.1      haven_2.4.3     
+ [5] colorspace_2.0-2 vctrs_0.3.8      generics_0.1.0   htmltools_0.5.2 
+ [9] yaml_2.2.1       utf8_1.2.2       rlang_0.4.11     jquerylib_0.1.4 
+[13] pillar_1.6.3     withr_2.4.2      glue_1.4.2       DBI_1.1.1       
+[17] dbplyr_2.1.1     modelr_0.1.8     readxl_1.3.1     lifecycle_1.0.1 
+[21] cellranger_1.1.0 munsell_0.5.0    gtable_0.3.0     rvest_1.0.1     
+[25] evaluate_0.14    knitr_1.36       tzdb_0.1.2       fastmap_1.1.0   
+[29] fansi_0.5.0      highr_0.9        broom_0.7.9      Rcpp_1.0.7      
+[33] scales_1.1.1     backports_1.2.1  jsonlite_1.7.2   fs_1.5.0        
+[37] hms_1.1.1        digest_0.6.28    stringi_1.7.5    xaringan_0.22.1 
+[41] grid_4.1.0       cli_3.0.1        tools_4.1.0      magrittr_2.0.1  
+[45] sass_0.4.0       crayon_1.4.1     pkgconfig_2.0.3  ellipsis_0.3.2  
+[49] xml2_1.3.2       reprex_2.0.1     lubridate_1.8.0  rstudioapi_0.13 
+[53] assertthat_0.2.1 rmarkdown_2.11   httr_1.4.2       R6_2.5.1        
+[57] compiler_4.1.0  
+```
+
+---
+
+class: middle
+
+A better way to keep track of package versions, system settings during compiling a project is by using `renv::snapshot()`. This function will create a `renv.lock` and will take a snapshot of packages to be stored in this file. 
+
+---
+
+class: middle
+
+Even a better approach for reproducible versions would be using [Docker](https://jsta.github.io/r-docker-tutorial/).
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
