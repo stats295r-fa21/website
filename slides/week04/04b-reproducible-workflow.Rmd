@@ -106,7 +106,7 @@ class: middle
 
 ## README examples
 
-- [ICS 80 website](https://github.com/ics80-fa21/website)
+- [Stats 295 website](https://github.com/stats295r-fa21/website)
 - [Museum of Modern Art Collection](https://github.com/MuseumofModernArt/collection)
 - [R package bayesrules](https://github.com/bayes-rules/bayesrules)
 
