@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Web Scraping</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="05b-web-scrape_files/header-attrs-2.11/header-attrs.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+
+
+
+
+
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# Web Scraping
+## Dr. Mine Dogucu
+]
+
+---
+
+class: middle
+
+## Review
+
+Quiz  
+GitHub collaboration 
+
+Note that this week's repo is blank because now you are in full charge of creating files.
+
+---
+
+class: middle
+
+## Goals
+
+- HTML &amp; CSS
+- Web scraping
+- Considerations when working with web data
+
+---
+
+
+class: inverse middle 
+
+.font75[**H**yper**t**ext **M**arkup **L**anguage]
+
+---
+
+class: center middle
+
+## An ugly web page
+
+&lt;img src="img/ugly-website.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: center middle
+
+### HTML document outline
+
+&lt;video width="80%" height="45%%" align = "center" controls&gt;
+  &lt;source src="screencast/5-html-start.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+---
+
+class: center middle
+
+### Paragraphs
+
+&lt;video width="80%" height="45%%" align = "center" controls&gt;
+  &lt;source src="screencast/5-p-tag.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+---
+
+class: center middle
+
+### Hyperlinks
+
+&lt;video width="80%" height="45%%" align = "center" controls&gt;
+  &lt;source src="screencast/5-a-tag.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+---
+
+`&lt;a href="https://www.r-project.org/"&gt;R&lt;/a&gt;`
+
+&lt;br&gt;
+
+--
+
+.pull-left[`&lt;a&gt; &lt;/a&gt;`] .pull-right[HTML tag]
+
+&lt;br&gt;
+
+--
+
+.pull-left[`href`] .pull-right[attribute (name)]
+
+&lt;br&gt;
+
+--
+
+.pull-left[`https://www.r-project.org/`].pull-right[attribute (value)]
+
+&lt;br&gt;
+
+--
+
+.pull-left[`R`] .pull-right[content]
+
+---
+
+class: center middle
+
+### Spans
+
+&lt;video width="80%" height="45%%" align = "center" controls&gt;
+  &lt;source src="screencast/5-span-tag.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+
+---
+
+class: inverse middle
+
+.font75[**C**ascading **S**tyle **S**heets]
+
+
+---
+class: center middle
+
+### Styling
+
+&lt;video width="80%" height="45%%" align = "center" controls&gt;
+  &lt;source src="screencast/5-style-css.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+
+---
+class: center middle
+
+&lt;img src="img/html-tree.jpeg" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse middle 
+
+.font75[Web scraping]
+
+---
+
+
+class: center middle
+
+[SelectorGadget](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=en)
+
+&lt;hr&gt;
+
+[IMDB 250 Top Rated Movies](https://www.imdb.com/chart/top)
+
+---
+
+class:middle
+
+&lt;img src="img/web-scrape.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+&lt;img src="img/imdb-top250.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+&lt;img src="img/imdb-csv.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+&lt;img src="img/browser.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+&lt;img src="img/imdb-getsource.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+&lt;img src="img/imdb-source.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: center middle
+
+&lt;video width="80%" height="45%%" align = "center" controls&gt;
+  &lt;source src="screencast/5-selector-gadget.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+---
+
+class: middle
+
+&lt;img src="img/imdb-source.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+&lt;img src="img/rvest-logo.png" width="20%" style="display: block; margin: auto;" /&gt;
+
+`read_html()` - reads an html page.  
+`html_nodes()`  - extracts the html nodes.  
+`html_text()` - extracts the text of the node.  
+`html_attr()` - extracts the attribute
+
+---
+
+class: middle
+
+## Load packages 
+
+
+```r
+library(rvest)          
+library(tidyverse)      
+```
+
+---
+
+class: middle
+
+### Check if a bot has permisson to access page
+
+
+```r
+robotstxt::paths_allowed("http://www.imdb.com")
+```
+
+```
+
+ www.imdb.com                      
+```
+
+```
+[1] TRUE
+```
+
+```r
+robotstxt::paths_allowed("http://www.facebook.com")
+```
+
+```
+
+ www.facebook.com                      
+```
+
+```
+[1] FALSE
+```
+
+---
+
+class: middle
+
+# Read the entire page
+
+
+```r
+page &lt;- read_html("http://www.imdb.com/chart/top")
+
+page
+```
+
+```
+{html_document}
+&lt;html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"&gt;
+[1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
+[2] &lt;body id="styleguide-v2" class="fixed"&gt;\n            &lt;img height="1" widt ...
+```
+
+---
+class: inverse middle
+
+.font50[Scrape titles]
+
+---
+
+class: middle
+
+
+```r
+page %&gt;%
+  html_nodes(".titleColumn a")
+```
+
+```
+{xml_nodeset (250)}
+ [1] &lt;a href="/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+ [2] &lt;a href="/title/tt0068646/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+ [3] &lt;a href="/title/tt0071562/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+ [4] &lt;a href="/title/tt0468569/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+ [5] &lt;a href="/title/tt0050083/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+ [6] &lt;a href="/title/tt0108052/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+ [7] &lt;a href="/title/tt0167260/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+ [8] &lt;a href="/title/tt0110912/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+ [9] &lt;a href="/title/tt0060196/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[10] &lt;a href="/title/tt0120737/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[11] &lt;a href="/title/tt0137523/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[12] &lt;a href="/title/tt0109830/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[13] &lt;a href="/title/tt1375666/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[14] &lt;a href="/title/tt0167261/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[15] &lt;a href="/title/tt0080684/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[16] &lt;a href="/title/tt0133093/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[17] &lt;a href="/title/tt0099685/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[18] &lt;a href="/title/tt0073486/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[19] &lt;a href="/title/tt0047478/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+[20] &lt;a href="/title/tt0114369/?pf_rd_m=A2FGELUUNOQJNL&amp;amp;pf_rd_p=e31d89dd-3 ...
+...
+```
+
+---
+
+class: middle
+
+
+```r
+page %&gt;%
+  html_nodes(".titleColumn a") %&gt;% 
+  html_text()
+```
+
+```
+  [1] "The Shawshank Redemption"                                            
+  [2] "The Godfather"                                                       
+  [3] "The Godfather: Part II"                                              
+  [4] "The Dark Knight"                                                     
+  [5] "12 Angry Men"                                                        
+  [6] "Schindler's List"                                                    
+  [7] "The Lord of the Rings: The Return of the King"                       
+  [8] "Pulp Fiction"                                                        
+  [9] "The Good, the Bad and the Ugly"                                      
+ [10] "The Lord of the Rings: The Fellowship of the Ring"                   
+ [11] "Fight Club"                                                          
+ [12] "Forrest Gump"                                                        
+ [13] "Inception"                                                           
+ [14] "The Lord of the Rings: The Two Towers"                               
+ [15] "Star Wars: Episode V - The Empire Strikes Back"                      
+ [16] "The Matrix"                                                          
+ [17] "Goodfellas"                                                          
+ [18] "One Flew Over the Cuckoo's Nest"                                     
+ [19] "Seven Samurai"                                                       
+ [20] "Se7en"                                                               
+ [21] "The Silence of the Lambs"                                            
+ [22] "City of God"                                                         
+ [23] "Life Is Beautiful"                                                   
+ [24] "It's a Wonderful Life"                                               
+ [25] "Star Wars: Episode IV - A New Hope"                                  
+ [26] "Saving Private Ryan"                                                 
+ [27] "Interstellar"                                                        
+ [28] "Spirited Away"                                                       
+ [29] "The Green Mile"                                                      
+ [30] "Parasite"                                                            
+ [31] "Léon: The Professional"                                              
+ [32] "Hara-Kiri"                                                           
+ [33] "The Pianist"                                                         
+ [34] "The Usual Suspects"                                                  
+ [35] "Terminator 2: Judgment Day"                                          
+ [36] "Back to the Future"                                                  
+ [37] "Psycho"                                                              
+ [38] "The Lion King"                                                       
+ [39] "Modern Times"                                                        
+ [40] "American History X"                                                  
+ [41] "Grave of the Fireflies"                                              
+ [42] "City Lights"                                                         
+ [43] "Whiplash"                                                            
+ [44] "Gladiator"                                                           
+ [45] "The Departed"                                                        
+ [46] "The Intouchables"                                                    
+ [47] "The Prestige"                                                        
+ [48] "Casablanca"                                                          
+ [49] "Once Upon a Time in the West"                                        
+ [50] "Rear Window"                                                         
+ [51] "Cinema Paradiso"                                                     
+ [52] "Alien"                                                               
+ [53] "Apocalypse Now"                                                      
+ [54] "Memento"                                                             
+ [55] "Raiders of the Lost Ark"                                             
+ [56] "The Great Dictator"                                                  
+ [57] "The Lives of Others"                                                 
+ [58] "Django Unchained"                                                    
+ [59] "Paths of Glory"                                                      
+ [60] "Sunset Blvd."                                                        
+ [61] "WALL·E"                                                              
+ [62] "Avengers: Infinity War"                                              
+ [63] "Witness for the Prosecution"                                         
+ [64] "The Shining"                                                         
+ [65] "Spider-Man: Into the Spider-Verse"                                   
+ [66] "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb"
+ [67] "Joker"                                                               
+ [68] "Princess Mononoke"                                                   
+ [69] "Oldboy"                                                              
+ [70] "Your Name."                                                          
+ [71] "The Dark Knight Rises"                                               
+ [72] "Coco"                                                                
+ [73] "Aliens"                                                              
+ [74] "Once Upon a Time in America"                                         
+ [75] "Capharnaüm"                                                          
+ [76] "Avengers: Endgame"                                                   
+ [77] "Das Boot"                                                            
+ [78] "High and Low"                                                        
+ [79] "Hamilton"                                                            
+ [80] "American Beauty"                                                     
+ [81] "Toy Story"                                                           
+ [82] "3 Idiots"                                                            
+ [83] "Amadeus"                                                             
+ [84] "Braveheart"                                                          
+ [85] "Inglourious Basterds"                                                
+ [86] "Good Will Hunting"                                                   
+ [87] "Star Wars: Episode VI - Return of the Jedi"                          
+ [88] "2001: A Space Odyssey"                                               
+ [89] "Reservoir Dogs"                                                      
+ [90] "M"                                                                   
+ [91] "Vertigo"                                                             
+ [92] "Like Stars on Earth"                                                 
+ [93] "Citizen Kane"                                                        
+ [94] "Come and See"                                                        
+ [95] "The Hunt"                                                            
+ [96] "Requiem for a Dream"                                                 
+ [97] "Singin' in the Rain"                                                 
+ [98] "North by Northwest"                                                  
+ [99] "Eternal Sunshine of the Spotless Mind"                               
+[100] "Bicycle Thieves"                                                     
+[101] "Ikiru"                                                               
+[102] "Lawrence of Arabia"                                                  
+[103] "The Kid"                                                             
+[104] "Pather Panchali"                                                     
+[105] "Full Metal Jacket"                                                   
+[106] "Dangal"                                                              
+[107] "The Father"                                                          
+[108] "The Apartment"                                                       
+[109] "Incendies"                                                           
+[110] "A Clockwork Orange"                                                  
+[111] "Taxi Driver"                                                         
+[112] "Metropolis"                                                          
+[113] "Double Indemnity"                                                    
+[114] "The Sting"                                                           
+[115] "A Separation"                                                        
+[116] "Scarface"                                                            
+[117] "1917"                                                                
+[118] "Snatch"                                                              
+[119] "Amélie"                                                              
+[120] "To Kill a Mockingbird"                                               
+[121] "Toy Story 3"                                                         
+[122] "For a Few Dollars More"                                              
+[123] "Up"                                                                  
+[124] "Indiana Jones and the Last Crusade"                                  
+[125] "Heat"                                                                
+[126] "L.A. Confidential"                                                   
+[127] "Dune"                                                                
+[128] "Yojimbo"                                                             
+[129] "Ran"                                                                 
+[130] "Die Hard"                                                            
+[131] "Rashomon"                                                            
+[132] "Green Book"                                                          
+[133] "Downfall"                                                            
+[134] "Monty Python and the Holy Grail"                                     
+[135] "All About Eve"                                                       
+[136] "Batman Begins"                                                       
+[137] "Some Like It Hot"                                                    
+[138] "Unforgiven"                                                          
+[139] "Children of Heaven"                                                  
+[140] "Howl's Moving Castle"                                                
+[141] "The Wolf of Wall Street"                                             
+[142] "Judgment at Nuremberg"                                               
+[143] "The Great Escape"                                                    
+[144] "Casino"                                                              
+[145] "The Treasure of the Sierra Madre"                                    
+[146] "There Will Be Blood"                                                 
+[147] "Pan's Labyrinth"                                                     
+[148] "A Beautiful Mind"                                                    
+[149] "The Secret in Their Eyes"                                            
+[150] "Raging Bull"                                                         
+[151] "My Neighbor Totoro"                                                  
+[152] "Chinatown"                                                           
+[153] "Lock, Stock and Two Smoking Barrels"                                 
+[154] "Shutter Island"                                                      
+[155] "The Gold Rush"                                                       
+[156] "No Country for Old Men"                                              
+[157] "Dial M for Murder"                                                   
+[158] "The Seventh Seal"                                                    
+[159] "Three Billboards Outside Ebbing, Missouri"                           
+[160] "The Thing"                                                           
+[161] "The Elephant Man"                                                    
+[162] "The Sixth Sense"                                                     
+[163] "Klaus"                                                               
+[164] "Wild Strawberries"                                                   
+[165] "The Third Man"                                                       
+[166] "The Truman Show"                                                     
+[167] "Jurassic Park"                                                       
+[168] "V for Vendetta"                                                      
+[169] "Memories of Murder"                                                  
+[170] "Inside Out"                                                          
+[171] "Blade Runner"                                                        
+[172] "Trainspotting"                                                       
+[173] "The Bridge on the River Kwai"                                        
+[174] "Fargo"                                                               
+[175] "Warrior"                                                             
+[176] "Finding Nemo"                                                        
+[177] "Kill Bill: Vol. 1"                                                   
+[178] "Gone with the Wind"                                                  
+[179] "Tokyo Story"                                                         
+[180] "On the Waterfront"                                                   
+[181] "My Father and My Son"                                                
+[182] "Z"                                                                   
+[183] "Stalker"                                                             
+[184] "Wild Tales"                                                          
+[185] "The Deer Hunter"                                                     
+[186] "Sherlock Jr."                                                        
+[187] "Gran Torino"                                                         
+[188] "The General"                                                         
+[189] "Persona"                                                             
+[190] "The Grand Budapest Hotel"                                            
+[191] "Prisoners"                                                           
+[192] "Before Sunrise"                                                      
+[193] "Mary and Max"                                                        
+[194] "Mr. Smith Goes to Washington"                                        
+[195] "Catch Me If You Can"                                                 
+[196] "Room"                                                                
+[197] "In the Name of the Father"                                           
+[198] "Barry Lyndon"                                                        
+[199] "Gone Girl"                                                           
+[200] "Hacksaw Ridge"                                                       
+[201] "Andhadhun"                                                           
+[202] "The Passion of Joan of Arc"                                          
+[203] "To Be or Not to Be"                                                  
+[204] "Ford v Ferrari"                                                      
+[205] "12 Years a Slave"                                                    
+[206] "The Big Lebowski"                                                    
+[207] "How to Train Your Dragon"                                            
+[208] "Autumn Sonata"                                                       
+[209] "Mad Max: Fury Road"                                                  
+[210] "Dead Poets Society"                                                  
+[211] "Ben-Hur"                                                             
+[212] "Million Dollar Baby"                                                 
+[213] "Harry Potter and the Deathly Hallows: Part 2"                        
+[214] "The Wages of Fear"                                                   
+[215] "Stand by Me"                                                         
+[216] "The Handmaiden"                                                      
+[217] "Network"                                                             
+[218] "Logan"                                                               
+[219] "Cool Hand Luke"                                                      
+[220] "Hachi: A Dog's Tale"                                                 
+[221] "The 400 Blows"                                                       
+[222] "Gangs of Wasseypur"                                                  
+[223] "La Haine"                                                            
+[224] "Platoon"                                                             
+[225] "Spotlight"                                                           
+[226] "A Silent Voice: The Movie"                                           
+[227] "Rebecca"                                                             
+[228] "Monsters, Inc."                                                      
+[229] "Monty Python's Life of Brian"                                        
+[230] "The Bandit"                                                          
+[231] "Hotel Rwanda"                                                        
+[232] "In the Mood for Love"                                                
+[233] "Rush"                                                                
+[234] "Into the Wild"                                                       
+[235] "Love's a Bitch"                                                      
+[236] "Rocky"                                                               
+[237] "Nausicaä of the Valley of the Wind"                                  
+[238] "Andrei Rublev"                                                       
+[239] "It Happened One Night"                                               
+[240] "Fanny and Alexander"                                                 
+[241] "Before Sunset"                                                       
+[242] "Neon Genesis Evangelion: The End of Evangelion"                      
+[243] "The Battle of Algiers"                                               
+[244] "Demon Slayer: Mugen Train"                                           
+[245] "The Princess Bride"                                                  
+[246] "Paris, Texas"                                                        
+[247] "Nights of Cabiria"                                                   
+[248] "Three Colors: Red"                                                   
+[249] "Tangerines"                                                          
+[250] "Miracle in Cell No. 7"                                               
+```
+
+---
+
+class: middle
+
+
+```r
+titles &lt;- page %&gt;%
+  html_nodes(".titleColumn a") %&gt;% 
+  html_text()
+```
+
+---
+
+class: middle
+
+
+```r
+str(titles)
+```
+
+```
+ chr [1:250] "The Shawshank Redemption" "The Godfather" ...
+```
+
+---
+
+class: inverse middle
+
+.font50[Scrape years]
+
+---
+
+class: middle
+
+
+```r
+page %&gt;% 
+  html_nodes(".secondaryInfo") %&gt;% 
+  html_text()
+```
+
+```
+  [1] "(1994)" "(1972)" "(1974)" "(2008)" "(1957)" "(1993)" "(2003)" "(1994)"
+  [9] "(1966)" "(2001)" "(1999)" "(1994)" "(2010)" "(2002)" "(1980)" "(1999)"
+ [17] "(1990)" "(1975)" "(1954)" "(1995)" "(1991)" "(2002)" "(1997)" "(1946)"
+ [25] "(1977)" "(1998)" "(2014)" "(2001)" "(1999)" "(2019)" "(1994)" "(1962)"
+ [33] "(2002)" "(1995)" "(1991)" "(1985)" "(1960)" "(1994)" "(1936)" "(1998)"
+ [41] "(1988)" "(1931)" "(2014)" "(2000)" "(2006)" "(2011)" "(2006)" "(1942)"
+ [49] "(1968)" "(1954)" "(1988)" "(1979)" "(1979)" "(2000)" "(1981)" "(1940)"
+ [57] "(2006)" "(2012)" "(1957)" "(1950)" "(2008)" "(2018)" "(1957)" "(1980)"
+ [65] "(2018)" "(1964)" "(2019)" "(1997)" "(2003)" "(2016)" "(2012)" "(2017)"
+ [73] "(1986)" "(1984)" "(2018)" "(2019)" "(1981)" "(1963)" "(2020)" "(1999)"
+ [81] "(1995)" "(2009)" "(1984)" "(1995)" "(2009)" "(1997)" "(1983)" "(1968)"
+ [89] "(1992)" "(1931)" "(1958)" "(2007)" "(1941)" "(1985)" "(2012)" "(2000)"
+ [97] "(1952)" "(1959)" "(2004)" "(1948)" "(1952)" "(1962)" "(1921)" "(1955)"
+[105] "(1987)" "(2016)" "(2020)" "(1960)" "(2010)" "(1971)" "(1976)" "(1927)"
+[113] "(1944)" "(1973)" "(2011)" "(1983)" "(2019)" "(2000)" "(2001)" "(1962)"
+[121] "(2010)" "(1965)" "(2009)" "(1989)" "(1995)" "(1997)" "(2021)" "(1961)"
+[129] "(1985)" "(1988)" "(1950)" "(2018)" "(2004)" "(1975)" "(1950)" "(2005)"
+[137] "(1959)" "(1992)" "(1997)" "(2004)" "(2013)" "(1961)" "(1963)" "(1995)"
+[145] "(1948)" "(2007)" "(2006)" "(2001)" "(2009)" "(1980)" "(1988)" "(1974)"
+[153] "(1998)" "(2010)" "(1925)" "(2007)" "(1954)" "(1957)" "(2017)" "(1982)"
+[161] "(1980)" "(1999)" "(2019)" "(1957)" "(1949)" "(1998)" "(1993)" "(2005)"
+[169] "(2003)" "(2015)" "(1982)" "(1996)" "(1957)" "(1996)" "(2011)" "(2003)"
+[177] "(2003)" "(1939)" "(1953)" "(1954)" "(2005)" "(1969)" "(1979)" "(2014)"
+[185] "(1978)" "(1924)" "(2008)" "(1926)" "(1966)" "(2014)" "(2013)" "(1995)"
+[193] "(2009)" "(1939)" "(2002)" "(2015)" "(1993)" "(1975)" "(2014)" "(2016)"
+[201] "(2018)" "(1928)" "(1942)" "(2019)" "(2013)" "(1998)" "(2010)" "(1978)"
+[209] "(2015)" "(1989)" "(1959)" "(2004)" "(2011)" "(1953)" "(1986)" "(2016)"
+[217] "(1976)" "(2017)" "(1967)" "(2009)" "(1959)" "(2012)" "(1995)" "(1986)"
+[225] "(2015)" "(2016)" "(1940)" "(2001)" "(1979)" "(1996)" "(2004)" "(2000)"
+[233] "(2013)" "(2007)" "(2000)" "(1976)" "(1984)" "(1966)" "(1934)" "(1982)"
+[241] "(2004)" "(1997)" "(1966)" "(2020)" "(1987)" "(1984)" "(1957)" "(1994)"
+[249] "(2013)" "(2019)"
+```
+
+---
+
+class: middle
+
+
+```r
+page %&gt;% 
+  html_nodes(".secondaryInfo") %&gt;% 
+  html_text() %&gt;% 
+  str_remove("\\(") %&gt;%                
+  str_remove("\\)") %&gt;%               
+  as.numeric()
+```
+
+```
+  [1] 1994 1972 1974 2008 1957 1993 2003 1994 1966 2001 1999 1994 2010 2002 1980
+ [16] 1999 1990 1975 1954 1995 1991 2002 1997 1946 1977 1998 2014 2001 1999 2019
+ [31] 1994 1962 2002 1995 1991 1985 1960 1994 1936 1998 1988 1931 2014 2000 2006
+ [46] 2011 2006 1942 1968 1954 1988 1979 1979 2000 1981 1940 2006 2012 1957 1950
+ [61] 2008 2018 1957 1980 2018 1964 2019 1997 2003 2016 2012 2017 1986 1984 2018
+ [76] 2019 1981 1963 2020 1999 1995 2009 1984 1995 2009 1997 1983 1968 1992 1931
+ [91] 1958 2007 1941 1985 2012 2000 1952 1959 2004 1948 1952 1962 1921 1955 1987
+[106] 2016 2020 1960 2010 1971 1976 1927 1944 1973 2011 1983 2019 2000 2001 1962
+[121] 2010 1965 2009 1989 1995 1997 2021 1961 1985 1988 1950 2018 2004 1975 1950
+[136] 2005 1959 1992 1997 2004 2013 1961 1963 1995 1948 2007 2006 2001 2009 1980
+[151] 1988 1974 1998 2010 1925 2007 1954 1957 2017 1982 1980 1999 2019 1957 1949
+[166] 1998 1993 2005 2003 2015 1982 1996 1957 1996 2011 2003 2003 1939 1953 1954
+[181] 2005 1969 1979 2014 1978 1924 2008 1926 1966 2014 2013 1995 2009 1939 2002
+[196] 2015 1993 1975 2014 2016 2018 1928 1942 2019 2013 1998 2010 1978 2015 1989
+[211] 1959 2004 2011 1953 1986 2016 1976 2017 1967 2009 1959 2012 1995 1986 2015
+[226] 2016 1940 2001 1979 1996 2004 2000 2013 2007 2000 1976 1984 1966 1934 1982
+[241] 2004 1997 1966 2020 1987 1984 1957 1994 2013 2019
+```
+
+
+---
+
+class: middle
+
+
+```r
+years &lt;- 
+  page %&gt;% 
+  html_nodes(".secondaryInfo") %&gt;% 
+  html_text() %&gt;% 
+  str_remove("\\(") %&gt;%                
+  str_remove("\\)") %&gt;%               
+  as.numeric()
+```
+
+
+---
+
+
+
+class: middle inverse
+
+.font50[Scrape ratings]
+
+---
+
+class: middle
+
+
+```r
+ratings &lt;- page %&gt;%
+  html_nodes("strong") %&gt;%
+  html_text() %&gt;%
+  as.numeric()
+```
+
+---
+
+class: middle
+
+
+```r
+imdb_top_250 &lt;- tibble(
+  title = titles, 
+  year = years, 
+  rating = ratings
+)
+```
+
+---
+class: middle
+
+
+```r
+imdb_top_250 %&gt;%
+  group_by(year) %&gt;%
+  summarize(avg_rating = mean(rating)) %&gt;% 
+  arrange(desc(avg_rating))
+```
+
+```
+# A tibble: 86 × 2
+   year avg_rating
+  &lt;dbl&gt;      &lt;dbl&gt;
+1  1972       9.1 
+2  1994       8.62
+3  1946       8.6 
+4  1977       8.6 
+5  1990       8.6 
+6  1974       8.55
+# … with 80 more rows
+```
+
+---
+
+class: middle
+
+
+```r
+imdb_top_250 %&gt;% 
+  filter(year == 1972)
+```
+
+```
+# A tibble: 1 × 3
+  title          year rating
+  &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;
+1 The Godfather  1972    9.1
+```
+
+---
+
+class: inverse middle
+.font75[API Wrappers]
+
+
+## Two ways of web scraping
+
+**Screen scraping**: What we have done by extracting the data from the source code of the website. 
+
+--
+
+**Web APIs** (Application Programming Interface): Website offers a set of http requests that you can use use to access data. 
+
+--
+
+However, there are wrapper packages for some APIs. In short, you can connect to certain APIs (i.e. if the package exists) without having to know about too much about working with APIs.
+
+---
+
+## Example
+
+
+```r
+library(spotifyr)
+```
+
+[https://github.com/charlie86/spotifyr](https://github.com/charlie86/spotifyr)
+---
+
+**Get Access to the Spotify API**
+
+https://developer.spotify.com/dashboard/login
+
+You will get a Client ID and Client Secret
+
+---
+
+## Authentication 
+
+Do not use this specific method on a public computer.
+
+--
+
+
+```r
+usethis::edit_r_environ()
+```
+
+--
+
+In your .Renviron write the following and save your file. The `XXXXXXXXX` comes from your own Spotify developer account.
+
+
+```r
+SPOTIFY_CLIENT_ID = XXXXXXXXXXXXXXXXXXXXXXXXXXX
+SPOTIFY_CLIENT_SECRET = XXXXXXXXXXXXXXXXXXXXXXXX
+```
+
+---
+
+class: middle center
+
+[List of functions in `spotifyr` package](https://www.rcharlie.com/spotifyr/reference/index.html)
+
+---
+
+[https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m](https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m) 
+
+--
+
+
+```r
+get_artist("6vWDO969PvNqNYHIOW5v0m")
+```
+
+```
+$external_urls
+$external_urls$spotify
+[1] "https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m"
+
+
+$followers
+$followers$href
+NULL
+
+$followers$total
+[1] 29199536
+
+
+$genres
+[1] "dance pop" "pop"       "r&amp;b"      
+
+$href
+[1] "https://api.spotify.com/v1/artists/6vWDO969PvNqNYHIOW5v0m"
+
+$id
+[1] "6vWDO969PvNqNYHIOW5v0m"
+
+$images
+  height                                                              url width
+1    640 https://i.scdn.co/image/ab6761610000e5ebd3d058be8485c8583703b6d2   640
+2    320 https://i.scdn.co/image/ab67616100005174d3d058be8485c8583703b6d2   320
+3    160 https://i.scdn.co/image/ab6761610000f178d3d058be8485c8583703b6d2   160
+
+$name
+[1] "Beyoncé"
+
+$popularity
+[1] 86
+
+$type
+[1] "artist"
+
+$uri
+[1] "spotify:artist:6vWDO969PvNqNYHIOW5v0m"
+```
+
+---
+
+
+```r
+get_artist("6vWDO969PvNqNYHIOW5v0m") %&gt;% 
+  str()
+```
+
+```
+List of 10
+ $ external_urls:List of 1
+  ..$ spotify: chr "https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m"
+ $ followers    :List of 2
+  ..$ href : NULL
+  ..$ total: int 29199536
+ $ genres       : chr [1:3] "dance pop" "pop" "r&amp;b"
+ $ href         : chr "https://api.spotify.com/v1/artists/6vWDO969PvNqNYHIOW5v0m"
+ $ id           : chr "6vWDO969PvNqNYHIOW5v0m"
+ $ images       :'data.frame':	3 obs. of  3 variables:
+  ..$ height: int [1:3] 640 320 160
+  ..$ url   : chr [1:3] "https://i.scdn.co/image/ab6761610000e5ebd3d058be8485c8583703b6d2" "https://i.scdn.co/image/ab67616100005174d3d058be8485c8583703b6d2" "https://i.scdn.co/image/ab6761610000f178d3d058be8485c8583703b6d2"
+  ..$ width : int [1:3] 640 320 160
+ $ name         : chr "Beyoncé"
+ $ popularity   : int 86
+ $ type         : chr "artist"
+ $ uri          : chr "spotify:artist:6vWDO969PvNqNYHIOW5v0m"
+```
+
+---
+
+class: inverse middle 
+
+.font75[Considerations about web data]
+
+---
+
+class: middle
+
+&lt;img src="img/considerations.jpeg" width="95%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+## Do you need all that data at that speed?
+
+**Sampling** rather than scraping all of the data may be an option.
+
+--
+
+You may end up with `HTTP Error 429 (Too many requests)`. In this case you may want to slow down your requests per a given time interval. 
+
+
+```r
+scrape_movie &lt;- function(movie_url) {
+  Sys.sleep(runif(1))
+  #### Remaining code of the function  
+}
+```
+
+Before scraping each movie's page this would make system to sleep for a random number of seconds between 0 and 1 second. 
+
+---
+
+class: middle
+
+## Write your data (if possible)
+
+- Data online are not static.
+
+- Web pages change structures.
+
+- Only way of reproducing the same results may be from the `.csv` files that you write.
+
+---
+
+class: middle
+
+## Optional
+
+Make use of `beepr::beep()`, this way when your code finishes running, you will be notified.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

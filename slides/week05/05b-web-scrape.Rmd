@@ -1,0 +1,564 @@
+---
+title: "Web Scraping"
+author: "Dr. Mine Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+---
+
+class: title-slide
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+options(scipen = 999)
+```
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+
+---
+
+class: middle
+
+## Review
+
+Quiz  
+GitHub collaboration 
+
+Note that this week's repo is blank because now you are in full charge of creating files.
+
+---
+
+class: middle
+
+## Goals
+
+- HTML & CSS
+- Web scraping
+- Considerations when working with web data
+
+---
+
+
+class: inverse middle 
+
+.font75[**H**yper**t**ext **M**arkup **L**anguage]
+
+---
+
+class: center middle
+
+## An ugly web page
+
+```{r echo = FALSE, out.width="80%", fig.align='center'}
+knitr::include_graphics("img/ugly-website.png")
+```
+
+
+---
+class: center middle
+
+### HTML document outline
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/5-html-start.mp4" type="video/mp4">
+</video>
+
+---
+
+class: center middle
+
+### Paragraphs
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/5-p-tag.mp4" type="video/mp4">
+</video>
+
+---
+
+class: center middle
+
+### Hyperlinks
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/5-a-tag.mp4" type="video/mp4">
+</video>
+---
+
+`<a href="https://www.r-project.org/">R</a>`
+
+<br>
+
+--
+
+.pull-left[`<a> </a>`] .pull-right[HTML tag]
+
+<br>
+
+--
+
+.pull-left[`href`] .pull-right[attribute (name)]
+
+<br>
+
+--
+
+.pull-left[`https://www.r-project.org/`].pull-right[attribute (value)]
+
+<br>
+
+--
+
+.pull-left[`R`] .pull-right[content]
+
+---
+
+class: center middle
+
+### Spans
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/5-span-tag.mp4" type="video/mp4">
+</video>
+
+
+---
+
+class: inverse middle
+
+.font75[**C**ascading **S**tyle **S**heets]
+
+
+---
+class: center middle
+
+### Styling
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/5-style-css.mp4" type="video/mp4">
+</video>
+
+
+---
+class: center middle
+
+```{r echo = FALSE, out.width="60%"}
+knitr::include_graphics("img/html-tree.jpeg")
+```
+
+---
+
+class: inverse middle 
+
+.font75[Web scraping]
+
+---
+
+
+class: center middle
+
+[SelectorGadget](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=en)
+
+<hr>
+
+[IMDB 250 Top Rated Movies](https://www.imdb.com/chart/top)
+
+---
+
+class:middle
+
+```{r echo = FALSE, fig.align='center',out.width="80%"}
+knitr::include_graphics("img/web-scrape.png")
+```
+
+---
+
+class: middle
+
+```{r echo = FALSE, fig.align='center',out.width="80%"}
+knitr::include_graphics("img/imdb-top250.png")
+```
+
+---
+
+class: middle
+
+```{r echo = FALSE, fig.align='center',out.width="80%"}
+knitr::include_graphics("img/imdb-csv.png")
+```
+
+---
+
+class: middle
+
+```{r echo = FALSE, fig.align='center',out.width="80%"}
+knitr::include_graphics("img/browser.png")
+```
+
+---
+
+class: middle
+
+```{r echo = FALSE, fig.align='center',out.width="80%"}
+knitr::include_graphics("img/imdb-getsource.png")
+```
+
+---
+
+class: middle
+
+```{r echo = FALSE, fig.align='center',out.width="80%"}
+knitr::include_graphics("img/imdb-source.png")
+```
+
+
+---
+
+class: center middle
+
+<video width="80%" height="45%%" align = "center" controls>
+  <source src="screencast/5-selector-gadget.mp4" type="video/mp4">
+</video>
+
+---
+
+class: middle
+
+```{r echo = FALSE, fig.align='center',out.width="80%"}
+knitr::include_graphics("img/imdb-source.png")
+```
+
+---
+
+class: middle
+
+```{r echo = FALSE, fig.align='center',out.width="20%"}
+knitr::include_graphics("img/rvest-logo.png")
+```
+
+`read_html()` - reads an html page.  
+`html_nodes()`  - extracts the html nodes.  
+`html_text()` - extracts the text of the node.  
+`html_attr()` - extracts the attribute
+
+---
+
+class: middle
+
+## Load packages 
+
+```{r message = FALSE}
+library(rvest)          
+library(tidyverse)      
+```
+
+---
+
+class: middle
+
+### Check if a bot has permisson to access page
+
+```{r}
+robotstxt::paths_allowed("http://www.imdb.com")
+robotstxt::paths_allowed("http://www.facebook.com")
+```
+
+---
+
+class: middle
+
+# Read the entire page
+
+```{r}
+page <- read_html("http://www.imdb.com/chart/top")
+
+page
+```
+
+---
+class: inverse middle
+
+.font50[Scrape titles]
+
+---
+
+class: middle
+
+```{r}
+page %>%
+  html_nodes(".titleColumn a")
+```
+
+---
+
+class: middle
+
+```{r}
+page %>%
+  html_nodes(".titleColumn a") %>% 
+  html_text()
+```
+
+---
+
+class: middle
+
+```{r}
+
+titles <- page %>%
+  html_nodes(".titleColumn a") %>% 
+  html_text()
+```
+
+---
+
+class: middle
+
+```{r}
+str(titles)
+```
+
+---
+
+class: inverse middle
+
+.font50[Scrape years]
+
+---
+
+class: middle
+
+```{r}
+page %>% 
+  html_nodes(".secondaryInfo") %>% 
+  html_text()
+```
+
+---
+
+class: middle
+
+```{r}
+page %>% 
+  html_nodes(".secondaryInfo") %>% 
+  html_text() %>% 
+  str_remove("\\(") %>%                
+  str_remove("\\)") %>%               
+  as.numeric()
+```
+
+
+---
+
+class: middle
+
+```{r}
+years <- 
+  page %>% 
+  html_nodes(".secondaryInfo") %>% 
+  html_text() %>% 
+  str_remove("\\(") %>%                
+  str_remove("\\)") %>%               
+  as.numeric()
+```
+
+
+---
+
+
+
+class: middle inverse
+
+.font50[Scrape ratings]
+
+---
+
+class: middle
+
+```{r}
+ratings <- page %>%
+  html_nodes("strong") %>%
+  html_text() %>%
+  as.numeric()
+```
+
+---
+
+class: middle
+
+```{r}
+imdb_top_250 <- tibble(
+  title = titles, 
+  year = years, 
+  rating = ratings
+)
+```
+
+---
+class: middle
+
+```{r}
+imdb_top_250 %>%
+  group_by(year) %>%
+  summarize(avg_rating = mean(rating)) %>% 
+  arrange(desc(avg_rating))
+```
+
+---
+
+class: middle
+
+```{r}
+imdb_top_250 %>% 
+  filter(year == 1972)
+```
+
+---
+
+class: inverse middle
+.font75[API Wrappers]
+
+
+## Two ways of web scraping
+
+**Screen scraping**: What we have done by extracting the data from the source code of the website. 
+
+--
+
+**Web APIs** (Application Programming Interface): Website offers a set of http requests that you can use use to access data. 
+
+--
+
+However, there are wrapper packages for some APIs. In short, you can connect to certain APIs (i.e. if the package exists) without having to know about too much about working with APIs.
+
+---
+
+class: middle
+
+## Example
+
+```{r}
+library(spotifyr)
+```
+
+[https://github.com/charlie86/spotifyr](https://github.com/charlie86/spotifyr)
+---
+
+**Get Access to the Spotify API**
+
+https://developer.spotify.com/dashboard/login
+
+You will get a Client ID and Client Secret
+
+---
+
+## Authentication 
+
+Do not use this specific method on a public computer.
+
+--
+
+```{r eval = FALSE}
+usethis::edit_r_environ()
+```
+
+--
+
+In your .Renviron write the following and save your file. The `XXXXXXXXX` comes from your own Spotify developer account.
+
+```{r eval = FALSE}
+SPOTIFY_CLIENT_ID = XXXXXXXXXXXXXXXXXXXXXXXXXXX
+SPOTIFY_CLIENT_SECRET = XXXXXXXXXXXXXXXXXXXXXXXX
+```
+
+---
+
+class: middle center
+
+[List of functions in `spotifyr` package](https://www.rcharlie.com/spotifyr/reference/index.html)
+
+---
+
+[https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m](https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m) 
+
+--
+
+```{r}
+get_artist("6vWDO969PvNqNYHIOW5v0m")
+```
+
+---
+
+```{r}
+get_artist("6vWDO969PvNqNYHIOW5v0m") %>% 
+  str()
+```
+
+---
+
+class: inverse middle 
+
+.font75[Considerations about web data]
+
+---
+
+class: middle
+
+```{r echo = FALSE, fig.align='center', out.width="95%"}
+knitr::include_graphics("img/considerations.jpeg")
+```
+
+---
+
+class: middle
+
+## Do you need all that data at that speed?
+
+**Sampling** rather than scraping all of the data may be an option.
+
+--
+
+You may end up with `HTTP Error 429 (Too many requests)`. In this case you may want to slow down your requests per a given time interval. 
+
+```{r}
+scrape_movie <- function(movie_url) {
+  Sys.sleep(runif(1))
+  #### Remaining code of the function  
+}
+```
+
+Before scraping each movie's page this would make system to sleep for a random number of seconds between 0 and 1 second. 
+
+---
+
+class: middle
+
+## Write your data (if possible)
+
+- Data online are not static.
+
+- Web pages change structures.
+
+- Only way of reproducing the same results may be from the `.csv` files that you write.
+
+---
+
+class: middle
+
+## Optional
+
+Make use of `beepr::beep()`, this way when your code finishes running, you will be notified.
