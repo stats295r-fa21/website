@@ -31,3 +31,193 @@ options(scipen = 999)
 ]
 
 ---
+
+class: middle
+
+## Goals
+
+- Probability Distribution and simulating data in R
+
+- Control structures (if/else, for and while loops and mapping)
+
+
+
+---
+
+#### Probability Distributions - Normal
+
+```{r}
+dnorm(x = -1.96, mean = 0, sd = 1)
+pnorm(q = -1.96, mean = 0, sd = 1)
+qnorm(p = 0.0249979, mean = 0, sd = 1, lower.tail = TRUE)
+rnorm(n = 3, mean = 0, sd = 1)
+```
+
+---
+
+## Probability Distributions - Normal
+
+.pull-left[
+
+```{r eval = FALSE}
+ggplot(data = data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 1)) + ylab("") +
+  scale_y_continuous(breaks = NULL)
+```
+
+]
+
+
+.pull-right[
+
+```{r echo = FALSE}
+ggplot(data = data.frame(x = c(-3, 3)), 
+       aes(x)) +
+  stat_function(fun = dnorm, 
+                n = 101, 
+                args =list(mean = 0, sd = 1)) +
+  ylab("") +
+  scale_y_continuous(breaks = NULL)
+```
+
+]
+
+---
+
+class: middle
+
+## Other probability Functions
+
+- `dbinom()`, `pbinom()`, `qbinom()`, `rbinom()`
+- `dbeta()`, `pbeta()`, `qbeta()`, `rbeta()`
+- `dunif()`, `punif()`, `qunif()`, `runif()`
+
+---
+
+class: middle
+
+```{r}
+runif(1)
+```
+
+
+```{r}
+set.seed(92697)
+runif(1)
+```
+
+`set.seed()` allows reproducibility of results when randomness is introduced.
+
+---
+
+## `while` loops
+
+.pull-left[
+```{r}
+
+count <- 0
+
+while(count < 10) {
+  count <- count + 1 
+  print(count)
+}
+
+```
+]
+
+.pull-right[
+```{r}
+
+count <- 0
+
+while(count < 10) {
+  print(count)
+  count <- count + 1 
+}
+
+```
+]
+
+---
+
+## if/else
+
+```{r eval=FALSE}
+
+if(condition) {
+  ## do something
+}
+
+## Rest of the code
+
+```
+
+```{r eval=FALSE}
+
+if(condition) {
+  ## do something
+} else {
+  ## do something else
+}
+
+```
+
+```{r eval=FA:SE}
+if(condition) {
+  ## do something
+  } else if(another condition) {
+  ## do something different
+  } else {
+    ## do something different
+}
+```
+
+---
+
+```{r}
+
+count <- 0
+
+while(count < 10) {
+  if(count < 5){
+    print(paste(count, "small number"))
+  }
+  count <- count + 1 
+}
+
+```
+
+---
+
+```{r}
+
+count <- 0
+
+while(count < 10) {
+  if(count %% 2 == 0){
+    print(paste(count, "even number"))
+  }
+  count <- count + 1 
+}
+
+```
+
+---
+
+```{r}
+
+count <- 0
+
+while(count < 10) {
+  if(count %% 2 == 0){
+    print(paste(count, "even number"))
+  } else {
+    print(paste(count, "odd number"))
+  }
+  count <- count + 1 
+}
+
+```
+
+---
+
