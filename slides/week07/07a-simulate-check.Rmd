@@ -162,7 +162,7 @@ if(condition) {
 
 ```
 
-```{r eval=FA:SE}
+```{r eval=FALSE}
 if(condition) {
   ## do something
   } else if(another condition) {
@@ -255,3 +255,14 @@ for (i in 1:length(sample_size)){
 
 lapply, sapply
 and mapping
+
+---
+
+class: middle
+
+This week's (long) task: 
+
+How does missing data (missing completely at random) impact bias and variance in simple linear regression?
+
+Design a simulation to answer this question.
+You are in charge of developing sub-questions.
