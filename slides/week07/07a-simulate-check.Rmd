@@ -44,6 +44,13 @@ class: middle
 
 ---
 
+class: middle
+
+- Go to course organization on GitHub
+- Start a new repo called `week-07-simulate-data-username` where username represents your own username.
+
+---
+
 #### Probability Distributions - Normal
 
 ```{r}

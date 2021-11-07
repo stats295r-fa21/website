@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Simulation and Control Structures</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="07a-simulate-check_files/header-attrs-2.11/header-attrs.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+
+
+
+
+
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# Simulation and Control Structures
+## Dr. Mine Dogucu
+]
+
+---
+
+class: middle
+
+## Goals
+
+- Probability Distribution and simulating data in R
+
+- Control structures (if/else, for and while loops and mapping)
+
+
+
+---
+
+class: middle
+
+- Go to course organization on GitHub
+- Start a new repo called `week-07-simulate-data-username` where username represents your own username.
+
+---
+
+#### Probability Distributions - Normal
+
+
+```r
+dnorm(x = -1.96, mean = 0, sd = 1)
+```
+
+```
+[1] 0.05844094
+```
+
+```r
+pnorm(q = -1.96, mean = 0, sd = 1)
+```
+
+```
+[1] 0.0249979
+```
+
+```r
+qnorm(p = 0.0249979, mean = 0, sd = 1, lower.tail = TRUE)
+```
+
+```
+[1] -1.96
+```
+
+```r
+rnorm(n = 3, mean = 0, sd = 1)
+```
+
+```
+[1]  1.0251129 -0.9156145  0.9926181
+```
+
+---
+
+## Probability Distributions - Normal
+
+.pull-left[
+
+
+```r
+ggplot(data = data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 1)) + ylab("") +
+  scale_y_continuous(breaks = NULL)
+```
+
+]
+
+
+.pull-right[
+
+&lt;img src="07a-simulate-check_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: middle
+
+## Other probability Functions
+
+- `dbinom()`, `pbinom()`, `qbinom()`, `rbinom()`
+- `dbeta()`, `pbeta()`, `qbeta()`, `rbeta()`
+- `dunif()`, `punif()`, `qunif()`, `runif()`
+
+---
+
+class: middle
+
+
+```r
+runif(1)
+```
+
+```
+[1] 0.9284356
+```
+
+
+
+```r
+set.seed(92697)
+runif(1)
+```
+
+```
+[1] 0.7773408
+```
+
+`set.seed()` allows reproducibility of results when randomness is introduced.
+
+---
+
+## `while` loops
+
+.pull-left[
+
+```r
+count &lt;- 0
+
+while(count &lt; 10) {
+  count &lt;- count + 1 
+  print(count)
+}
+```
+
+```
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+```
+]
+
+.pull-right[
+
+```r
+count &lt;- 0
+
+while(count &lt; 10) {
+  print(count)
+  count &lt;- count + 1 
+}
+```
+
+```
+[1] 0
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+```
+]
+
+---
+
+## if/else
+
+
+```r
+if(condition) {
+  ## do something
+}
+
+## Rest of the code
+```
+
+
+```r
+if(condition) {
+  ## do something
+} else {
+  ## do something else
+}
+```
+
+
+```r
+if(condition) {
+  ## do something
+  } else if(another condition) {
+  ## do something different
+  } else {
+    ## do something different
+}
+```
+
+---
+
+
+```r
+count &lt;- 0
+
+while(count &lt; 10) {
+  if(count &lt; 5){
+    print(paste(count, "small number"))
+  }
+  count &lt;- count + 1 
+}
+```
+
+```
+[1] "0 small number"
+[1] "1 small number"
+[1] "2 small number"
+[1] "3 small number"
+[1] "4 small number"
+```
+
+---
+
+
+```r
+count &lt;- 0
+
+while(count &lt; 10) {
+  if(count %% 2 == 0){
+    print(paste(count, "even number"))
+  }
+  count &lt;- count + 1 
+}
+```
+
+```
+[1] "0 even number"
+[1] "2 even number"
+[1] "4 even number"
+[1] "6 even number"
+[1] "8 even number"
+```
+
+---
+
+
+```r
+count &lt;- 0
+
+while(count &lt; 10) {
+  if(count %% 2 == 0){
+    print(paste(count, "even number"))
+  } else {
+    print(paste(count, "odd number"))
+  }
+  count &lt;- count + 1 
+}
+```
+
+```
+[1] "0 even number"
+[1] "1 odd number"
+[1] "2 even number"
+[1] "3 odd number"
+[1] "4 even number"
+[1] "5 odd number"
+[1] "6 even number"
+[1] "7 odd number"
+[1] "8 even number"
+[1] "9 odd number"
+```
+
+---
+
+## for loops
+
+
+```r
+for (i in 1:10){
+  print(i)
+}
+```
+
+```
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+```
+
+---
+
+## for loops
+
+
+
+
+```r
+sample_size &lt;- c(30, 60, 100)
+for (i in 1:3){
+  print(sample_size[i])
+}
+```
+
+```
+[1] 30
+[1] 60
+[1] 100
+```
+
+
+```r
+sample_size &lt;- c(30, 60, 100)
+for (i in 1:length(sample_size)){
+  print(sample_size[i])
+}
+```
+
+```
+[1] 30
+[1] 60
+[1] 100
+```
+
+---
+
+lapply, sapply
+and mapping
+
+---
+
+class: middle
+
+This week's (long) task: 
+
+How does missing data (missing completely at random) impact bias and variance in simple linear regression?
+
+Design a simulation to answer this question.
+You are in charge of developing sub-questions.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
