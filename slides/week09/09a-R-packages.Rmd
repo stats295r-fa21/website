@@ -1,0 +1,189 @@
+---
+title: "R packages: Part I"
+author: "Dr. Mine Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+---
+
+class: title-slide
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+options(scipen = 999)
+```
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+
+---
+
+class: middle
+
+## Naming your package
+
+```{r eval=FALSE}
+available::available("mypackage")
+```
+
+---
+
+class: middle
+
+## Creating your package
+
+File > New Project > New Directory > R Package
+
+---
+
+class: middle
+
+## Package directory
+
+- `R` where R scripts for functions are stored. 
+- `man` where documentation files are stored.
+- DESCRIPTION contains the metadata about the package. 
+- NAMESPACE will be generated automatically. More on this later.
+
+More components to follow later (e.g. data storage).
+
+
+---
+
+class: middle
+
+## Shortcuts
+
+Install Package: `Cmd + Shift + B`
+Check Package:  `Cmd + Shift + E`
+Test Package: `Cmd + Shift + T`
+
+---
+
+class: middle
+
+## Adding a license
+
+```{r eval=FALSE}
+usethis::use_mit_license("Mine Dogucu")
+```
+
+
+```{r eval=FALSE}
+✓ Writing 'LICENSE' # what CRAN requires
+✓ Writing 'LICENSE.md' # created only for human-readers
+✓ Adding '^LICENSE\\.md$' to '.Rbuildignore' # LICENSE.md is ignored when package is built
+```
+
+[usethis license functions](https://usethis.r-lib.org/reference/licenses.html)
+
+---
+
+class: middle
+
+## Writing functions
+
+- Functions are written in an `.R` file and stored in the `R` file.
+
+- You do not need one `.R` file per function. If functions are closely related you may want to keep them in a single file. 
+
+---
+
+
+class: middle
+
+## Documenting functions
+
+When your cursor is inside a function code, then click on `Code>Insert ROxygen Skeleton`
+
+
+---
+class: middle
+
+`#' Mean and Median Summaries for Numerical Vectors`  
+`#'`  
+`#' @param some_variable a numeric vector`  
+`#' @param na.rm indicates whether missing data should be removed or not`  
+`#'`
+`#' @return a numeric vector with mean and median values`  
+`#' @export`  
+`#' @importFrom stats median dbinom`  
+`#' @examples`  
+`#' print_mean_median(mtcars$mpg, na.rm = TRUE)`
+
+---
+
+class: middle
+
+## Dependencies
+
+- All functions that are from packages other than `base` need to be explicitly imported, either as a function or as a full package.
+
+- All functions from a package can be imported with `@import`
+
+- Specific functions can be imported with `@importFrom stats median dbinom`
+
+---
+
+class: middle
+
+## Documentation
+
+```{r eval=FALSE}
+devtools::document()
+```
+
+---
+
+class: middle
+
+## Workflow so far
+
+1. Write function
+2. Add ROxygen Skeleton and write documentation
+3. `devtools:document()`
+4. `devtools:check()`
+
+---
+
+class: middle
+
+## Testing
+
+```{r eval=FALSE}
+devtools::test()
+x No testing infrastructure found. Create it?
+
+1: Yes
+2: No
+```
+
+This will create the `tests` folder where we will store the previously written tests.
+We will use the tests from last week.
+
+---
+
+class: middle
+
+## Workflow 
+
+1. Write function
+2. Add ROxygen Skeleton and write documentation
+3. `devtools:document()`
+4. `devtools:check()`
+5. Write tests
+6. `devtools:test()`
