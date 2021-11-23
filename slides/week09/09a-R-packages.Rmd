@@ -138,7 +138,17 @@ class: middle
 - Specific functions can be imported with `@importFrom stats median dbinom`
 
 ---
+class: middle
 
+```{r echo=FALSE, out.width="38%"}
+knitr::include_graphics("img/dependency.png")
+```
+
+.center[
+[xkcd](https://xkcd.com/2347)
+]
+
+---
 class: middle
 
 ## Documentation
