@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>R packages: Part II</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Mine Dogucu" />
+    <script src="09b-R-packages2_files/header-attrs-2.11/header-attrs.js"></script>
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+
+
+
+
+
+
+&lt;br&gt;
+&lt;br&gt;
+.right-panel[ 
+
+# R packages: Part II
+## Dr. Mine Dogucu
+]
+
+---
+
+class: middle
+
+## Data in R packages
+
+- For disseminating data
+- For examples in vignettes and other documentation
+- For tests (keep it simple)
+
+---
+
+class: middle
+
+## Data in R packages
+
+- If any of your data needs wrangling, make sure to record this in an `.R` file stored in `data-raw` folder.
+
+- Once you are done wrangling the data, you can write the data by 
+`usethis::use_data(data_frame_name, overwrite = TRUE)`
+
+
+
+```r
+✓ Setting active project to '/Users/minedogucu/Desktop/mypackage'
+✓ Adding 'R' to Depends field in DESCRIPTION
+✓ Creating 'data/'
+✓ Saving 'mtcars_sample' to 'data/mtcars_sample.rda'
+• Document your data (see 'https://r-pkgs.org/data.html')
+```
+
+
+
+- Make sure to add `^data-raw$` to `.Rbuildignore`
+
+---
+
+class: middle
+
+## Documenting Data
+
+- In `R/data_mtcars_sample.R` document the data.
+
+- The `data` prefix in the file name helps distinguish functions and packages.
+
+- Example from [bayesrules](https://github.com/bayes-rules/bayesrules/blob/master/R/data_big_word_club.R)
+
+- `@export` is not used for datasets.
+
+- Once you are done documenting, do not forget to `devtools::document`.
+
+
+---
+
+class: middle
+
+## Writing vignettes
+
+- Vignettes are longer form of documentation. 
+
+- It is especially useful if you are introducing a set of packages that are related to each other. 
+
+- Example: [stringr's regular expressions vignette](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html)
+---
+class: middle
+
+## Writing vignettes
+
+
+```r
+&gt; usethis::use_vignette("my-vignette")
+✓ Adding 'knitr' to Suggests field in DESCRIPTION
+✓ Setting VignetteBuilder field in DESCRIPTION to 'knitr'
+✓ Adding 'inst/doc' to '.gitignore'
+✓ Creating 'vignettes/'
+✓ Adding '*.html', '*.R' to 'vignettes/.gitignore'
+✓ Adding 'rmarkdown' to Suggests field in DESCRIPTION
+✓ Writing 'vignettes/my-vignette.Rmd'
+• Modify 'vignettes/my-vignette.Rmd'
+&gt; 
+&gt; 
+```
+
+
+---
+
+class: middle
+
+## pkgdown
+
+`pkgdown` is a package that makes it easy to build a website for R packages. 
+
+
+```r
+# To configure your package to use pkgdown
+usethis::use_pkgdown()
+```
+
+
+```r
+# build the website
+pkgdown::build_site()
+```
+
+Example [bayesrules](https://bayes-rules.github.io/bayesrules/docs/)
+
+---
+class: middle
+
+## DESCRIPTION
+
+[Example](https://github.com/bayes-rules/bayesrules/blob/master/DESCRIPTION)
+
+---
+
+class: middle
+
+## Imports vs. Suggests
+
+**Imports:** Any time your package is installed these packages will be installed. They are required for your package to work. 
+
+**Suggests** These may be required for running tests, building vignettes, etc.
+
+
+---
+
+class: middle
+
+## Author information
+
+- `cre` creator or maintaner of the package.
+- `aut` authors 
+- `ctb` contributors
+- `cph` copyright holder
+
+---
+
+class: middle
+
+## Version number
+
+- `major.minor.patch` is a version number system for released packages. 
+
+- e.g. We are using [version 2.4.2](https://cran.r-project.org/web/packages/devtools/index.html) of devtools which indicates 2 is the major number, 4 is the minor number, and the last 2 is the patch number. 
+
+- Developers continue to work on their packages even after release and this usually is indicated with .9000 at the end of the version number. For instance devtools version on GitHub is currently [2.4.2.9000](https://github.com/r-lib/devtools/blob/main/DESCRIPTION).
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "pygments",
+"highlightLines": true,
+"highlightLanguage": "r"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
