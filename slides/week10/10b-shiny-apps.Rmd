@@ -1,0 +1,61 @@
+---
+title: "Shiny Apps continued"
+author: "Dr. Mine Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: "pygments"
+      highlightLines: true
+      highlightLanguage: "r"
+---
+
+class: title-slide
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+options(scipen = 999)
+```
+
+<br>
+<br>
+.right-panel[ 
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$author`
+]
+
+---
+
+class: center middle
+Review
+---
+
+class: middle
+
+## Shiny+ packages
+
+[shinydashboard](https://rstudio.github.io/shinydashboard/)
+
+[shinythemes](https://rstudio.github.io/shinythemes/)
+
+[DT](https://rstudio.github.io/DT/)
+
+[Leaflet with Shiny](https://rstudio.github.io/leaflet/shiny.html)
+
+[shinyalert](https://github.com/daattali/shinyalert/blob/master/README.md)
+
+
+---
+
+class: middle center
+
+[Shiny contest winners](https://www.rstudio.com/blog/winners-of-the-3rd-annual-shiny-contest/)
+
+
+
